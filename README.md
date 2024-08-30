@@ -31,3 +31,17 @@
 - sass를 설치합니다. `npm install sass`
 - gsap를 설치합니다. `npm install gsap`
 - lenis를 설치합니다. `npm install @studio-freight/lenis`
+
+## git 셋팅
+### reate a new repository on the command line
+#### echo "# port2024-react" >> README.md
+- git init
+- git add README.md
+- git commit -m "first commit"
+- git branch -M main
+- git remote add origin https://github.com/grapelove79/port2024-react.git
+- git push -u origin main
+
+### git에 모두 올리기
+- git add .
+- git commit -m "리액트 커밋 완료"
