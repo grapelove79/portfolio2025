@@ -1,8 +1,10 @@
 import React from 'react'
 
-const Main = () => {
+const Main = ({ childern }) => {
   return (
-    <div>Main</div>
+    <div id="main" role="main">
+      { childern }
+    </div>
   )
 }
 
