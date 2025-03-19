@@ -2,9 +2,9 @@ import React from 'react'
 
 const Main = ({ childern }) => {
   return (
-    <div id="main" role="main">
+    <main id="main" role="main">
       { childern }
-    </div>
+    </main>
   )
 }
 
