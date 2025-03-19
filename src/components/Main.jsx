@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Main = ({ childern }) => {
+const Main = ({ children }) => {
   return (
     <main id="main" role="main">
-      { childern }
+        { children }
     </main>
   )
 }
