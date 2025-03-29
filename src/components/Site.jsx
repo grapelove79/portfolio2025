@@ -57,9 +57,9 @@ const Site = () => {
             <article className={`site__item s${key+1}`} key={key}>
             <span className="num">{key+1}.</span>
             <div className="text">
-              <div>{site.make[0]}</div>
-              <div>{site.make[1]}</div>
-              <div>{site.make[2]}</div>
+              <div>{site.text[0]}</div>
+              <div>{site.text[1]}</div>
+              <div>{site.text[2]}</div>
             </div>
             <h3 className="title">{site.title}</h3>
             <div className="btn">
