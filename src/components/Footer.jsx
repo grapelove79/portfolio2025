@@ -1,22 +1,5 @@
 import React from "react";
-
-const footerText = [
-  {
-      title: "react",
-      desc: "리액트로 만든 사이트를 같이 만들어 봅니다.",
-      link: "https://github.com/webstoryboy/port2023-react",
-  },
-  {
-      title: "vue",
-      desc: "뷰로 만든 사이트를 같이 만들어 봅니다.",
-      link: "https://github.com/webstoryboy/port2023-vue",
-  },
-  {
-      title: "next",
-      desc: "넥스트로 만든 사이트를 같이 만들어 봅니다.",
-      link: "https://github.com/webstoryboy/port2023-next",
-  },
-];
+import { footerText } from "../constants";
 
 const Footer = () => {
   return (

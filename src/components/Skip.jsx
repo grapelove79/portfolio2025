@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const Skip = () => {
   return (
@@ -14,4 +14,4 @@ const Skip = () => {
   )
 }
 
-export default Skip
+export default Skip;

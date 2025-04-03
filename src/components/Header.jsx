@@ -1,27 +1,5 @@
-import React, { useState } from "react"
-
-const headderNav = [
-  {
-    title: "intro",
-    url: "#intro"
-  },
-  {
-    title: "skill",
-    url: "#skill"
-  },
-  {
-    title: "site",
-    url: "#site"
-  },
-  {
-    title: "portfolio",
-    url: "#portfolio"
-  },
-  {
-    title: "contact",
-    url: "#contact"
-  }
-]
+import React, { useState } from "react";
+import { headerNav } from "../constants";
 
 const Header = () => {
   const [show, setShow] = useState(false);
@@ -48,7 +26,7 @@ const Header = () => {
         aria-label="메인메뉴"
         > 
           <ul>
-            {headderNav.map((nav, key) => (
+            {headerNav.map((nav, key) => (
               <li key={key}>
                   <a href={nav.url}>{nav.title}</a>
               </li>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const Main = ({ children }) => {
   return (
@@ -8,4 +8,4 @@ const Main = ({ children }) => {
   )
 }
 
-export default Main
+export default Main;
