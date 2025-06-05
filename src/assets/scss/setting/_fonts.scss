@@ -1,13 +1,88 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
-@import url("https://websfont.github.io/nanumSquareNeo/nanumSquareNeo.css");
-@import url("https://websfont.github.io/gmarket/gmarket.css");
+// @import url('https://cdn.jsdelivr.net/gh/leetaewook/gmarket-sans-dynamic-subset/GmarketSans.css');
 
 .mont {
-    font-family: "Montserrat";
+	font-family: "Montserrat";
 }
+
 .nanum {
-    font-family: "nanumSquareNeo";
+	font-family: "nanumSquareNeo";
 }
-.gmarket {
-    font-family: "gmarket";
+
+// .gmarket {
+//     font-family: "Gmarket Sans";
+// }
+
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf) {
+	$formats: (
+		eot: 'embedded-opentype',
+		ttf: 'truetype',
+		woff: 'woff',
+		woff2: 'woff2',
+	);
+
+$src-main: null;
+
+@font-face {
+	font-family: quote($name);
+	font-style: $style;
+	font-weight: $weight;
+	font-display: swap;
+
+	// 첫 번째 줄
+	src: url(quote("#{$path}.eot"));
+
+	// 두 번째 줄
+	$src-main: (
+	);
+
+@each $ext in $exts {
+	@if $ext ==eot {
+		$src-main: append($src-main, url(quote("#{$path}.eot?#iefix")) format("embedded-opentype"), comma);
+	}
+
+	@else {
+		$format: map-get($formats, $ext);
+		$src-main: append($src-main, url(quote("#{$path}.#{$ext}")) format(quote($format)), comma);
+	}
 }
+
+src: $src-main;
+}
+}
+
+
+@include font-face('nanumSquareNeo', '../../fonts/NanumSquareNeo-aLt', 200, normal, (eot, woff2, woff, ttf));
+@include font-face('nanumSquareNeo', '../../fonts/NanumSquareNeo-bRg', 400, normal, (eot, woff2, woff, ttf));
+@include font-face('nanumSquareNeo', '../../fonts/NanumSquareNeo-cBd', 700, normal, (eot, woff2, woff, ttf));
+@include font-face('nanumSquareNeo', '../../fonts/NanumSquareNeo-dEb', 800, normal, (eot, woff2, woff, ttf));
+@include font-face('nanumSquareNeo', '../../fonts/NanumSquareNeo-eHv', 900, normal, (eot, woff2, woff, ttf));
+
+
+@font-face {
+	font-family: "GmarketSans";
+	font-style: normal;
+	font-weight: bold;
+	font-display: swap;
+	src:
+		url("../../fonts/GmarketSansTTFBold.ttf") format("truetype"),
+}
+
+@font-face {
+	font-family: "GmarketSans";
+	font-style: normal;
+	font-weight: normal;
+	font-display: swap;
+	src:
+		url("../../fonts/GmarketSansTTFMedium.ttf") format("truetype"),
+}
+
+@font-face {
+	font-family: "GmarketSans";
+	font-style: normal;
+	font-weight: lighter;
+	font-display: swap;
+	src:
+		url("../../fonts/GmarketSansTTFLight.ttf") format("truetype"),
+}
+

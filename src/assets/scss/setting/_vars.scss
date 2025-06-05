@@ -1,9 +1,10 @@
 :root {
   --mainEng-font: "Montserrat";
   --mainKor-font: "nanumSquareNeo";
-  --mainNum-font: "gmarket";
+  --mainNum-font: "GmarketSans";
 
-  --mainBg-color: #f3ede8;
+  --mainBg-color: #f5f0eb;
+  // --mainBg-color: #f3ede8;
   --subBg100: #cdc0b1;
   --subBg200: #afa395;
   --subBg300: #81887c;
@@ -17,8 +18,9 @@
   --black300: #686868;
   --black400: #e0e0e0;
 
-  font-family: var(--mainEng-font), var(--mainKor-font);
-  font-size: 16px;
+  font-family: var(--mainKor-font), var(--mainEng-font);
+  // font-size: 16px;
+  font-size: 62.5%;
   line-height: 1.5;
   font-weight: 400;
 
@@ -29,11 +31,16 @@
   -webkit-text-size-adjust: 100%;
 
   @media (max-width: 800px) {
-      font-size: 14px;
-      line-height: 1.4;
+    font-size: 14px;
+    line-height: 1.4;
   }
 }
 
 body {
-  background-color: var(--mainBg-color);
+  background-color: var(--white);
+  // background-color: var(--mainBg-color);
+
+  @media (max-width: 800px) {
+    cursor: auto;
+  }
 }

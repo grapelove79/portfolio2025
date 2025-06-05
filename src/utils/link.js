@@ -1,15 +1,15 @@
 const link = () => {
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      anchor.addEventListener("click", function (e) {
-          e.preventDefault();
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
 
-          const targetId = this.getAttribute("href");
-          const targetElement = document.querySelector(targetId);
+      const targetId = this.getAttribute("href");
+      const targetElement = document.querySelector(targetId);
 
-          if (targetElement) {
-              targetElement.scrollIntoView({ behavior: "smooth" });
-          }
-      });
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: "smooth" });
+      }
+    });
   });
 };
 

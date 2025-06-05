@@ -1,0 +1,13 @@
+.cursor {
+  svg {
+    transition: transform 0.2s ease;
+  }
+
+  &.scale svg {
+    transform: scale(2);
+  }
+
+  &.invert svg {
+    transform: scale(1);
+  }
+}

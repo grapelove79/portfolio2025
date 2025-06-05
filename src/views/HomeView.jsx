@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../components/Header";
 import Skip from "../components/Skip";
+import IntroSection from "../components/IntroSection";
 import Intro from "../components/Intro";
 import Skill from "../components/Skill";
 import Site from "../components/Site";
@@ -15,7 +16,8 @@ const HomeView = () => {
       <Skip />
       <Header />
       <Main>
-        <Intro />
+        <IntroSection /> {/* 영상 시퀀스 */}
+        <Intro />        {/* 기존 인트로 */}
         <Skill />
         <Site />
         <Port />
@@ -23,7 +25,7 @@ const HomeView = () => {
       </Main>
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default HomeView
+export default HomeView;

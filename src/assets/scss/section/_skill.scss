@@ -1,5 +1,12 @@
+
+
+#skill {
+  padding-top: 10.5rem;
+  padding-bottom: 10.5rem;
+}
+
 .skill__inner {
-  padding: 16px;
+  padding: 0 max(5.2rem, 5.2vw);
   display: flex;
   justify-content: space-between;
 
@@ -11,7 +18,7 @@
     position: sticky;
     top: 70px;
     left: 0;
-    width: 48%;
+    width: 38%;
     height: 5vw;
     font-size: 4vw;
     font-weight: 900;
@@ -19,7 +26,7 @@
     font-family: var(--mainKor-font);
     text-transform: uppercase;
     color: var(--black100);
-    border-bottom: 0.4vw solid var(--black100);
+    // border-bottom: 0.4vw solid var(--black100);
 
     @media (max-width: 800px) {
       width: 100%;
@@ -38,9 +45,9 @@
   }
 
   .skill__desc {
-    width: 50%;
+    width: 60%;
 
-    @media (max-width: 800px) { 
+    @media (max-width: 800px) {
       width: 100%;
     }
 
@@ -57,15 +64,53 @@
     }
 
     h3 {
-      font-size: 1.5rem;
-      text-decoration: underline;
-      text-underline-position: under;
+      font-size: 2.5rem;
+      // text-decoration: underline;
+      // text-underline-position: under;
       margin-bottom: 1vw;
+      font-weight: bold;
     }
 
     p {
-      margin-bottom: 30vh;
-      font-size: 1.1rem;
+      // margin-bottom: 30vh;
+      margin-bottom: 3.75rem;
+      font-size: 1.6rem;
+    }
+  }
+
+  .skill__list {
+    display: flex;
+    justify-content: flex-start;
+    text-align: center;
+    flex-wrap: wrap;
+    overflow: hidden;
+
+    li {
+      position: relative;
+      border: 1px solid red;
+      width: calc((100% - 10rem) / 3);
+      border-radius: max(0.7rem, 0.7vw);
+      margin-right: max(1.3rem, 1.3vw);
+ transform: translateY(50px); // 초기 transform과 gsap set가 동일해야 함
+  opacity: 0;
+  // height: 21.9rem;
+    }
+
+  //    position: relative;
+  // border: 1px solid red;
+  // width: calc((100% - 4.5rem) / 3);
+  // border-radius: max(0.7rem, 0.7vw);
+  // margin-right: max(1.3rem, 1.3vw);
+  // transform: translateY(99px);
+  // opacity: 0;
+
+
+    li:nth-of-type(2n) {
+      margin-right: max(1.4rem, 1.4vw);
+    }
+
+    li:nth-of-type(n + 4) {
+      margin-top: max(1.4rem, 1.4vw);
     }
   }
 }
