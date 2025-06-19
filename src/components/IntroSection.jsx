@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { intro } from "../constants";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -53,7 +54,7 @@ const IntroSection = () => {
           scrub: true,                  // 스크롤과 애니메이션 동기화 (부드럽게 연결)
           pin: true,
           invalidateOnRefresh: true,
-          markers: true,
+          // markers: true,
 
           // 스크롤할 때마다 실행되는 함수
           onUpdate: (self) => {
@@ -65,15 +66,15 @@ const IntroSection = () => {
 
             if (self.direction === -1) {
               // scroll up
-              if (progress < 1) banner?.classList.remove("active");
+              if (progress === 1) banner?.classList.remove("active");
               if (progress < 10) textRefs.current[0]?.classList.remove("active");
               if (progress < 35) textRefs.current[0]?.classList.remove("none");
               if (progress < 55) textRefs.current[1]?.classList.remove("active");
               if (progress < 80) videoEl?.classList.remove("active");
-            } else {
+            } else if (self.direction === 1) {
               // scroll down
               if (progress > 1) banner?.classList.add("active");
-              if (progress < 10) textRefs.current[0]?.classList.add("active");
+              if (progress > 10) textRefs.current[0]?.classList.add("active");
               if (progress > 35) textRefs.current[0]?.classList.add("none");
               if (progress > 55) textRefs.current[1]?.classList.add("active");
               if (progress > 80) videoEl?.classList.add("active");
@@ -96,29 +97,23 @@ const IntroSection = () => {
   return (
     <section className="video-section" ref={containerRef}>
       <div className="banner-box" ref={bannerRef}>
-       <div className="banner-inner">
-          <span>2025</span>
-          <strong>portfolio</strong>
-       </div>
+        <div className="banner-inner">
+          <p>2025</p>
+          <strong>Portfolio</strong>
+        </div>
       </div>
-
       <div className="video-wrap" ref={videowrapRef}>
-        <video ref={videoRef} src="/intro.mp4" muted playsInline />
+        <video ref={videoRef} src="/intro.mp4" muted playsInline loop />
         <div className="txt_motion_box">
-          <div
-            className="txt_motion txt_motion01"
-            ref={(el) => (textRefs.current[0] = el)}
-          >
-            <strong>여행을 준비하세요</strong>
-            <p>새로운 시작을 위한 첫 걸음</p>
-          </div>
-          <div
-            className="txt_motion txt_motion02"
-            ref={(el) => (textRefs.current[1] = el)}
-          >
-            <strong>추억을 간직하세요</strong>
-            <p>당신만의 스토리를 만들어가세요</p>
-          </div>
+          {intro.map((text, index) => (
+            <div key={index}
+              className={`txt_motion txt_motion0${index + 1}`}
+              ref={(el) => (textRefs.current[index] = el)}
+            >
+              <strong>{text.title}</strong>
+              <p>{text.desc}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

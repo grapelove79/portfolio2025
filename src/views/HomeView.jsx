@@ -4,7 +4,7 @@ import Skip from "../components/Skip";
 import IntroSection from "../components/IntroSection";
 import Intro from "../components/Intro";
 import Skill from "../components/Skill";
-import Site from "../components/Site";
+import Career from '../components/Career';
 import Port from "../components/Port";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
@@ -19,7 +19,7 @@ const HomeView = () => {
         <IntroSection /> {/* 영상 시퀀스 */}
         <Intro />        {/* 기존 인트로 */}
         <Skill />
-        <Site />
+        <Career />
         <Port />
         <Contact />
       </Main>

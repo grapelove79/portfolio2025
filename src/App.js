@@ -18,7 +18,7 @@ const App = () => {
   return (
     <>
       {/* 로딩이 끝나지 않았으면 로딩 화면만 보여줌 */}
-      {!loadingDone && (
+      {!loadingDone && (  // loadingDone 이 true 가 아닌 경우 true
         <LoadingScreen onFinish={() => setLoadingDone(true)} />
       )}
       {/* 로딩이 끝났으면 메인 앱 전체 렌더링 */}

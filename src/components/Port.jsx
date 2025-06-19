@@ -4,100 +4,102 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const Port = () => {
-  // ScrollTrigger 플러그인 등록
   gsap.registerPlugin(ScrollTrigger);
 
-  // ref: 전체 섹션(ScrollTrigger pin 대상)
-  const horizontalRef = useRef(null);
-  // ref: 가로로 움직일 wrap 전체 요소
-  const sectionRef = useRef(null);
-  // ref: 제목 영역 (너비 계산 기준)
-  const titleRef = useRef(null);
+  const horizontalRef = useRef(null); // 수평 pin 대상 전체 섹션
+  const sectionRef = useRef(null);    // 수평 이동할 전체 wrapper(가로 슬라이드 요소)
+  const titleRef = useRef(null);      // 제목 기준 요소
 
-  // 작업물 리스트 전체 너비와 타이틀 기준 너비 저장
   const [dimensions, setDimensions] = useState({ workW: 0, innerW: 0 });
 
-  // 창 크기 변경 시마다 너비 재측정
+  // (1) 전체 width 계산 후 상태 저장
   useEffect(() => {
+
+    // 너비 계산 시 추가
     const updateSizes = () => {
       if (!sectionRef.current || !titleRef.current) return;
 
-      const workW = sectionRef.current.offsetWidth;   // 작업물 전체 너비
-      const innerW = titleRef.current.offsetWidth;    // 타이틀 기준 너비
+      const workW = sectionRef.current.offsetWidth;    // 슬라이드 전체 너비
+      const innerW = titleRef.current.offsetWidth;     // 타이틀 너비
+      // left 값까지 포함한 총 이동 거리 계산
+      // const leftOffset = parseFloat(getComputedStyle(titleRef.current).width); // '100rem' → px
 
+      console.log(workW, "workW", innerW, "innerW")
       setDimensions({ workW, innerW });
+      // setDimensions({ workW, innerW, leftOffset});
 
-      // ScrollTrigger 레이아웃 재계산
       ScrollTrigger.refresh();
     };
 
-    updateSizes(); // 초기 실행
+    updateSizes();
     window.addEventListener("resize", updateSizes);
     return () => window.removeEventListener("resize", updateSizes);
   }, []);
 
-  // ScrollTrigger 생성 및 수평 이동 처리
+  // (2) ScrollTrigger를 활용한 수평 스크롤 트윈 설정
   useEffect(() => {
     if (!horizontalRef.current || !sectionRef.current) return;
 
+    // const { workW, leftOffset } = dimensions;
     const { workW, innerW } = dimensions;
+    const windowW = window.innerWidth;
+    const section = horizontalRef.current;
 
-    // ScrollTrigger 생성
-    const trigger = ScrollTrigger.create({
-      trigger: horizontalRef.current,     // 고정 기준 요소
-      start: "top top",                   // 시작 위치
-      end: "bottom+=150% bottom",         // 추가 스크롤 여유
-      pin: true,                          // 해당 섹션 고정
-      scrub: 1,                           // 부드러운 연동
-      invalidateOnRefresh: true,         // 리사이즈 시 재계산
-      onUpdate: (self) => {
-        const windowW = window.innerWidth;
+    if (!section) return;
+    //const totalMove =  workW - windowW + leftOffset;  // 전체 이동 거리 계산
+    const totalMove = windowW - innerW + (workW - windowW);
+    console.log(totalMove, "totalMove")
 
-        // 전체 이동 거리 계산
-        const totalMove = -(windowW - innerW + (workW - windowW));
+    // 기존 트윈 제거 (안전)
+    gsap.killTweensOf(sectionRef.current);
 
-        // 이동 거리 적용
-        gsap.to(sectionRef.current, {
-          x: self.progress.toFixed(3) * totalMove,  // 스크롤 비율에 따른 이동
-          duration: 0.2,
-          overwrite: true,
-        });
+    const tween = gsap.to(sectionRef.current, {
+      x: -totalMove, // 왼쪽으로 이동
+      ease: "none",
+      scrollTrigger: {
+        trigger: horizontalRef.current,
+        start: "top top",
+        end: () => `+=${workW}`, // 섹션 너비만큼 스크롤 거리 생성
+        pin: true,
+        scrub: true,
+        invalidateOnRefresh: true,
+        markers: true,
       },
     });
 
-    return () => trigger.kill(); // 언마운트 시 제거
+    return () => {
+      tween.scrollTrigger?.kill();
+      tween.kill();
+
+    };
   }, [dimensions]);
 
   return (
-    <section id="port" ref={horizontalRef}>
-      <div className="port__inner">
-        <h2 className="port__title" ref={titleRef}>
-          portfolio <em>포폴 작업물</em>
+    <section id="port">
+      <div className="port__inner" ref={horizontalRef}>
+        <h2 className="port__title scroll__motion" ref={titleRef}>
+          포트폴리오 <em>Portfolio</em>
         </h2>
-        {/* 가로로 이동할 전체 영역에 ref 설정 */}
-        <div className="slide-con">
+        <div className="slide-con scroll__motion">
           <div className="port__wrap" ref={sectionRef}>
             {portText.map((port, key) => (
               <article className={`port__item p${key + 1}`} key={key}>
                 <a
-                  href={port.code}
+                  href={port.view}
                   target="_blank"
-                  className="img"
+                  className="port__item-link"
                   rel="noreferrer noopener"
                 >
-                  <img src={port.img} alt={port.name} />
+                  <div className="port__img">
+                    <img src={port.img} alt={port.name} />
+                  </div>
+                  <div className="port__desc">
+                    <h3 className="company">{port.company}</h3>
+                    <h3 className="title">{port.title}</h3>
+                    <p className="desc">{port.desc}</p>
+                    <span className="arrow"></span>
+                  </div>
                 </a>
-                <div className="port__desc">
-                  <h3 className="title">{port.title}</h3>
-                  <p className="desc">{port.desc}</p>
-                  <a
-                    href={port.view}
-                    target="_blank"
-                    className="site"
-                    rel="noreferrer noopener"
-                  >
-                  </a>
-                </div>
               </article>
             ))}
           </div>

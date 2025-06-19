@@ -1,37 +1,75 @@
 #contact {
-  height: 100vh;
+  min-height: calc(100vh - 200rem);
+  padding-top: 105rem;
+
+  @media screen and (max-width: 1024px) {
+    min-height: calc(100vh - 100rem);
+    padding-top: 90rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    min-height: auto;
+  }
 }
 
 .contact__inner {
   width: 100%;
   height: 100%;
-  padding: 16px;
   display: flex;
   align-items: flex-start;
-  justify-content: flex-end;
+  justify-content: center;
   flex-direction: column;
 
-  @media (max-width: 800px){ 
+  @media (max-width: 1024px) {
     justify-content: center;
   }
 
-  .contact__title {
-    font-size: 10vw;
-    text-transform: uppercase;
-    line-height: 1;
-    font-weight: 800;
-    white-space: nowrap;
-    text-indent: -0.5vw;
-    letter-spacing: -0.3vw;
+  .contact__motion {
+    transform: translateY(70rem);
+    opacity: 0;
+    transition-property: transform, opacity;
+    transition-duration: 0.7s;
+    transition-timing-function: cubic-bezier(0.41, 0.01, 0.16, 1.01);
 
-    @media (max-width: 800px){ 
-      display: none;
+    &.active {
+      transform: translateY(0);
+      opacity: 1;
     }
   }
 
-  .contact__text {
-    width: 100%;
-    height: 40vh;
+  .contact__title {
+    width: calc(100% - 200rem);
+    height: 4vw;
+    margin: 0px auto;
+    font-size: 44rem;
+    font-weight: 900;
+    font-family: var(--mainKor-font);
+    text-transform: uppercase;
+    color: var(--black100);
+    margin-bottom: 52rem;
+
+    @media screen and (max-width: 1024px) {
+      height: auto;
+      font-size: 24rem;
+      width: calc(100% - 40rem);
+      margin-bottom: 32rem;
+    }
+
+    em {
+      font-size: 18rem;
+      font-weight: 700;
+      line-height: 2;
+
+      @media screen and (max-width: 1024px) {
+        font-size: 14rem;
+      }
+    }
+  }
+
+  .contact__wrap {
+    width: calc(100% - 200rem);
+    height: 610rem;
+    min-height: 280rem;
     background-color: var(--black);
     color: var(--white);
     display: flex;
@@ -39,91 +77,41 @@
     justify-content: center;
     flex-direction: column;
     position: relative;
+    border-radius: 24rem;
+    margin: 0 auto;
+    padding: 20rem 30rem 30rem;
+    text-align: center;
 
-    .text {
-      font-size: 3vw;
-      line-height: 1;
-      font-weight: 900;
-      text-transform: uppercase;
-      text-decoration: underline;
-      text-align: center;
+    @media screen and (max-width: 1024px) {
+      width: calc(100% - 40rem);
+      height: 305rem;
+    }
+
+    .contact__desc {
+      font-size: 36rem;
+      margin-bottom: 30rem;
+
+      @media screen and (max-width: 1024px) {
+        font-size: 22rem;
+        margin-bottom: 10rem;
+      }
+    }
+
+    .contact__mail {
       position: relative;
-      z-index: 100;
+      font-size: 44rem;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: 1rem;
+      font-family: var(--mainEng-font);
+      text-align: center;
       transition: all 0.3s;
       cursor: all-scroll;
+      z-index: 100;
 
-      @media (max-width: 800px){ 
-          font-size: 24px;
-          padding: 0 16px;
-          word-break: break-all;
-      }
-    }
-  }
-
-  .contact__lines {
-    width: 100%;
-
-    .line {
-      display: block;
-      width: 100%;
-      height: 1px;
-      background-color: var(--black);
-      margin-bottom: 0.5vw;
-
-      &:nth-child(1){
-          height: 25px;
-      }
-      &:nth-child(2){
-          height: 17px;
-      }
-      &:nth-child(3){
-          height: 13px;
-      }
-      &:nth-child(4){
-          height: 9px;
-      }
-      &:nth-child(5){
-          height: 5px;
-      }
-      &:nth-child(6){
-          height: 2px;
-      }
-      &:nth-child(7){
-          height: 1px;
-      }
-    }
-    
-    &.top {
-      .line {
-        margin-top: 0.5vw;
-        margin-bottom: 0;
-        display: none;
-
-        @media (max-width: 800px){ 
-            display: block;
-        }
-
-        &:nth-child(1){
-            height: 1px;
-        }
-        &:nth-child(2){
-            height: 2px;
-        }
-        &:nth-child(3){
-            height: 5px;
-        }
-        &:nth-child(4){
-            height: 9px;
-        }
-        &:nth-child(5){
-            height: 13px;
-        }
-        &:nth-child(6){
-            height: 17px;
-        }
-        &:nth-child(7){
-            height: 25px;
-        }
+      @media (max-width: 1024px) {
+        font-size: 22rem;
+        word-break: break-all;
       }
     }
   }
