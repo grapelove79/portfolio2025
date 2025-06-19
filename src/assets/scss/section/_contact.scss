@@ -1,14 +1,10 @@
 #contact {
-  min-height: calc(100vh - 200rem);
+  min-height: calc(100dvh - 200rem);
   padding-top: 105rem;
 
   @media screen and (max-width: 1024px) {
-    min-height: calc(100vh - 100rem);
+    min-height: calc(100dvh - 100rem);
     padding-top: 90rem;
-  }
-
-  @media screen and (max-width: 600px) {
-    min-height: auto;
   }
 }
 
@@ -49,7 +45,6 @@
     margin-bottom: 52rem;
 
     @media screen and (max-width: 1024px) {
-      height: auto;
       font-size: 24rem;
       width: calc(100% - 40rem);
       margin-bottom: 32rem;

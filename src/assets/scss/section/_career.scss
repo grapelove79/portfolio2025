@@ -20,7 +20,6 @@
     margin-bottom: 52rem;
 
     @media screen and (max-width: 1024px) {
-      height: auto;
       font-size: 24rem;
       width: calc(100% - 40rem);
        margin-bottom: 32rem;
@@ -54,11 +53,13 @@
       position: sticky;
       left: 0;
       border-radius: 42rem;
+      margin-bottom: 34rem;
 
       @media screen and (max-width: 1024px) {
         height: 340rem;
         padding: 20rem;
         border-radius: 20rem;
+        margin-bottom: 20rem;
       }
 
       &.s1 {
