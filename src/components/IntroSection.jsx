@@ -103,7 +103,7 @@ const IntroSection = () => {
         </div>
       </div>
       <div className="video-wrap" ref={videowrapRef}>
-        <video ref={videoRef} src="/intro.mp4" muted playsInline loop />
+        <video ref={videoRef} src="/intro.mp4" muted playsInline autoPlay loop />
         <div className="txt_motion_box">
           {intro.map((text, index) => (
             <div key={index}

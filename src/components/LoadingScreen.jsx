@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 // props로 onFinish를 받아옴 → 카운트다운이 끝났을 때 실행할 함수
 const LoadingScreen = ({ onFinish }) => {
-  // 3초부터 시작하는 타이머 상태
+  // 5초부터 시작하는 타이머 상태
   const [count, setCount] = useState(3);
   const [fadeOut, setFadeOut] = useState(false)
 
@@ -21,9 +21,12 @@ const LoadingScreen = ({ onFinish }) => {
   }, [count, onFinish]);
 
   return (
-    <div className={`loading-screen ${fadeOut ? "fade-out" : ""}`}>
-      <p><span>{count}</span>... 로딩 중</p>
-    </div>
+    <section id="loading" className={`${fadeOut ? "fade-out" : ""}`}>
+      <div className="loading-screen">
+        <div className='img'></div>
+        <p><span>{count}</span>... 로딩 중</p>
+      </div>
+    </section>
   );
 };
 
