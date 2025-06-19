@@ -22,7 +22,7 @@ const LoadingScreen = ({ onFinish }) => {
 
   return (
     <div className={`loading-screen ${fadeOut ? "fade-out" : ""}`}>
-      <p><span>{count}</span> 초 후에 열립니다.</p>
+      <p><span>{count}</span>... 로딩 중</p>
     </div>
   );
 };

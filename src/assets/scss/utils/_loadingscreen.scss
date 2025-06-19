@@ -1,7 +1,7 @@
 .loading-screen {
   width: 100dvw;
   height: 100dvh;
-  background: #000;
+  background: var(--cyan);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,17 +13,27 @@
   }
 
   p {
-    color: #fff;
-    font-size: 20rem;
+    color: var(--darkBlue);
+    font-size: 40rem;
     font-family: var(--mainKor-font);
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media screen and (max-width: 1024px) {
+      font-size: 20rem;
+    }
   }
 
   span {
-    font-size: 30rem;
+    text-align: center;
+    width: 50rem;
+    font-size: 60rem;
     font-family: var(--mainEng-font);
-    margin-right: 10rem;
+
+    @media screen and (max-width: 1024px) {
+      width: 20rem;
+      font-size: 30rem;
+    }
   }
 }

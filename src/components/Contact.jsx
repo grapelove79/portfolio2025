@@ -14,7 +14,6 @@ const Contact = () => {
             item.classList.remove("active");
           }
         });
-
       },
       {
         threshold: 0.5, // 50% 이상 보여야 적용
@@ -26,7 +25,6 @@ const Contact = () => {
     // if (target) observer.observe(target);
     return () => observer.disconnect();
   }, []);
-
 
   return (
     <section id="contact">
