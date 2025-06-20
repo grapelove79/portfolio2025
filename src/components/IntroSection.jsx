@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { intro } from "../constants";
+import ResponsiveText from "../components/ResponsiveText";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -111,7 +112,13 @@ const IntroSection = () => {
               ref={(el) => (textRefs.current[index] = el)}
             >
               <strong>{text.title}</strong>
-              <p>{text.desc}</p>
+              <div>
+                <ResponsiveText
+                  text={text.desc}
+                  as="p"
+                />
+              </div>
+              {/* <p>{text.desc}</p> */}
             </div>
           ))}
         </div>
