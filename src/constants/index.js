@@ -282,25 +282,7 @@ export const portText = [
 
 export const contactText = [
   {
-    link: "mailto:grapelove79@gmail.com",
-    title: "grapelove79@gmail.com",
-  },
-];
-
-export const footerText = [
-  {
-    title: "react",
-    desc: "리액트로 만든 사이트를 같이 만들어 봅니다.",
-    link: "https://github.com/webstoryboy/port2023-react",
-  },
-  {
-    title: "vue",
-    desc: "뷰로 만든 사이트를 같이 만들어 봅니다.",
-    link: "https://github.com/webstoryboy/port2023-vue",
-  },
-  {
-    title: "next",
-    desc: "넥스트로 만든 사이트를 같이 만들어 봅니다.",
-    link: "https://github.com/webstoryboy/port2023-next",
+    link: "mailto:naver@gmail.com",
+    title: "naver@gmail.com",
   },
 ];
