@@ -9,7 +9,9 @@
     position: sticky;
     top: 70rem;
     left: 0;
-    height: 4vw;
+    height: max(44rem, 4.4vw);
+    font-size: 44rem;
+    line-height: 1.9;
     width: calc(100% - 200rem); // 25.5.30
     margin: 0px auto; // 25.5.30
     font-size: 44rem;
@@ -21,6 +23,7 @@
 
     @media screen and (max-width: 1024px) {
       font-size: 24rem;
+      height: max(24rem, 2.2vw);
       width: calc(100% - 40rem);
     }
 

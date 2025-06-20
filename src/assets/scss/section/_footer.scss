@@ -9,7 +9,9 @@
     background: var(--white);
 
     @media screen and (max-width: 1024px) {
-      height: 100rem;
+      padding: 50rem 0;
+      width: 100%;
+      height: auto;
     }
 
     .footer__info {

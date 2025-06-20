@@ -20,8 +20,9 @@
     top: 70rem;
     left: 0;
     width: 34%;
-    height: 4vw;
+    height: max(44rem, 4.4vw);
     font-size: 44rem;
+    line-height: 1.9;
     font-weight: 900;
     font-family: var(--mainKor-font);
     text-transform: uppercase;
@@ -31,6 +32,7 @@
       position: relative;
       width: 100%;
       font-size: 24rem;
+      height: max(24rem, 2.2vw);
       top: 0;
       margin-bottom: 52rem;
     }
