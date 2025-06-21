@@ -282,7 +282,7 @@ export const portText = [
 
 export const contactText = [
   {
-    link: "mailto:naver@gmail.com",
-    title: "naver@gmail.com",
+    link: "mailto:grapelove79@gmail.com",
+    title: "grapelove79@gmail.com",
   },
 ];

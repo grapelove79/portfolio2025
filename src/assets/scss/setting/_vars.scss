@@ -16,6 +16,7 @@
   --black200: #434343;
   --black300: #686868;
   --black400: #e0e0e0;
+  --black500: #DDE1E6;
 
   --orange: #feb546;
   --yellow: #f5b914;
@@ -35,11 +36,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-html,
-body {
-  -webkit-overflow-scrolling: touch;
-}
-
 html {
   width: 100%;
   height: 100%;
@@ -52,8 +48,9 @@ html {
   @media screen and (max-width: 600px) {
     font-size: .256vw;
   }
+}
 
-  body {
+body {
     position: relative;
     height: 100%;
     font-size: 16rem;
@@ -67,4 +64,3 @@ html {
     -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
   }
-}

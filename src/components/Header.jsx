@@ -91,10 +91,12 @@ const Header = () => {
   ].join(" ").trim();
 
   return (
-    <header id="header" role="banner" >
+    <header id="header" className={headerClassName} role="banner">
       {/* <header id="header" role="banner" className={isHeaderHidden ? "hide" : ""}> */}
-      <div className={`header__wrap ${headerClassName}`}>
-        <div className="header__inner">
+      {/* <div className="header__wrap">
+       
+      </div> */}
+       <div className="header__inner">
           <h1 className="header__logo">
             <a href="/">Youngsun</a>
           </h1>
@@ -126,7 +128,6 @@ const Header = () => {
             <span></span>
           </div>
         </div>
-      </div>
     </header>
   )
 }
