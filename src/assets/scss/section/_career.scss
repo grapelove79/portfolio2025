@@ -77,7 +77,7 @@
       &.s2 {
         top: 220rem;
         color: var(--darkBlue);
-        background-color:var(--cyan);
+        background-color: var(--cyan);
 
         @media (max-width: 1024px) {
           top: 160rem;
@@ -117,8 +117,6 @@
       .title__wrap {
         position: relative;
         height: calc(var(--vh, 1vh) * 100); // 실제 뷰포트 기준 높이
-        align-content: center;
-        flex: 1;
 
         .title__inner {
           position: absolute;
