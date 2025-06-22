@@ -1,74 +1,91 @@
 import React, { useEffect, useRef, useState } from "react";
 import { headerNav } from "../constants";
-import useAppStore from "../hooks/useAppStore"; // Zustand 상태 훅
+import useAppStore from "../hooks/useAppStore";
 
 const Header = () => {
-  const [on, setOn] = useState(false); // 모바일 메뉴 열기/닫기 상태
-  const lastScrollYRef = useRef(0); // 이전 scrollY 저장
-  const scrollDirectionRef = useRef(null); // 이전 방향 저장 ("up" | "down")
-
+  const [on, setOn] = useState(false);
+  const lastScrollYRef = useRef(0);
+  const scrollDirectionRef = useRef(null);
   const { isHeaderHidden, setHeaderHidden, isScrollDisabled } = useAppStore();
-  const [isMobile, setIsMobile] = useState(false); // 화면 크기 체크
+  const [isMobile, setIsMobile] = useState(false);
+  const headerRef = useRef(null);
 
-  // 화면 크기 변경 시 isMobile 상태 업데이트
+  // 화면 크기 체크
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 1024); // 1024px 이하일 때만 모바일로 간주
+      setIsMobile(window.innerWidth <= 1024);
     };
-
-    handleResize(); // 처음 렌더링 시 체크
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   // 메뉴 열기/닫기
   const toggleMenu = () => {
-    if (isMobile) {
-      // useState가 기본값이 false이기 때문에 
-      // prevShow가 false 이면 => prevShow를 반대(!)로 true 로 해주고,
-      // prevShow가 true 이면 => prevShow를 반대(!)로 false 로 해줘라!
-      setOn(prev => !prev); // 모바일에서만 메뉴 토글
-    }
+    if (!isMobile) return;
+    setOn(prev => {
+      const next = !prev;
+      console.log("📌 메뉴 토글 상태:", next);
+      return next;
+    });
   };
 
-  // aria-expanded 상태에 따라 body 클래스 추가/제거
+  // body stop-scroll 클래스 처리
   useEffect(() => {
+    console.log("📌 on 상태 변경:", on);
     const body = document.body;
     if (on) {
       body.classList.add("stop-scroll");
     } else {
       body.classList.remove("stop-scroll");
     }
-  }, [on]); // on 상태가 변경될 때마다 실행
+  }, [on]);
 
-  // 스크롤 시 헤더 감지
+  // 외부 클릭 시 닫기
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      const menu = document.querySelector(".header__nav");
+      const toggle = document.querySelector("#headerToggle");
+
+      if (
+        on &&
+        menu &&
+        toggle &&
+        !menu.contains(e.target) &&
+        !toggle.contains(e.target)
+      ) {
+        setOn(false);
+        console.log("📌 외부 클릭으로 메뉴 닫힘");
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [on]);
+
+  // 헤더 스크롤 숨김/표시
   useEffect(() => {
     const handleScroll = () => {
-      if (isScrollDisabled) return; // GSAP ScrollTrigger 내에서는 감지 OFF
+      if (isScrollDisabled) return;
 
       const currentScroll = window.scrollY;
-
       const isMenuOpen =
-        document.querySelector("#header")?.classList.contains("on") &&
+        headerRef.current?.classList.contains("on") &&
         document.querySelector(".header__nav__mobile")?.getAttribute("aria-expanded") === "true" &&
         document.body.classList.contains("stop-scroll");
 
       if (isMenuOpen) {
-        if (isHeaderHidden) setHeaderHidden(false); // 조건 충족 시 hide 제거
+        if (isHeaderHidden) setHeaderHidden(false);
         return;
       }
-      const direction =
-        currentScroll > lastScrollYRef.current && currentScroll > 41 ? "down" : "up";
 
-      // 방향이 바뀔 때만 setHeaderHidden 호출
+      const direction =
+        currentScroll > lastScrollYRef.current && currentScroll > 0 ? "down" : "up";
+
       if (direction !== scrollDirectionRef.current) {
         scrollDirectionRef.current = direction;
-
-        if (direction === "down") {
-          setHeaderHidden(true); // 아래로 스크롤 → 숨김
-        } else {
-          setHeaderHidden(false); // 위로 스크롤 → 보임
-        }
+        if (direction === "down") setHeaderHidden(true);
+        else setHeaderHidden(false);
       }
 
       lastScrollYRef.current = currentScroll;
@@ -78,58 +95,51 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isScrollDisabled, isHeaderHidden, setHeaderHidden]);
 
-
-  // 메뉴 클릭 시 닫기 (모바일에서)
+  // 모바일 메뉴 클릭 시 닫기
   const handleNavClick = () => {
     setOn(false);
   };
 
-  // 클래스명 조합
   const headerClassName = [
     isHeaderHidden ? "hide" : "",
-    isMobile && on ? "on" : "", // 모바일에서만 on 클래스 적용
+    isMobile && on ? "on" : "",
   ].join(" ").trim();
 
   return (
-    <header id="header" className={headerClassName} role="banner">
-      {/* <header id="header" role="banner" className={isHeaderHidden ? "hide" : ""}> */}
-      {/* <div className="header__wrap">
-       
-      </div> */}
-       <div className="header__inner">
-          <h1 className="header__logo">
-            <a href="/">Youngsun</a>
-          </h1>
-          {/* PC & 모바일 공통 네비게이션 */}
-          {/* show의 값이 true 면 show 가 붙고 아니면 아무것도 없게 "" 처리  */}
-          <nav
-            className="header__nav"
-            role="navigation"
-            aria-label="메인메뉴"
-          >
-            <ul className="nav__wrap">
-              {headerNav.map((nav, key) => (
-                <li key={key}>
-                  <a href={nav.url} onClick={handleNavClick}>{nav.title}</a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          {/* 모바일 메뉴 토글 버튼 */}
-          <div
-            className="header__nav__mobile"
-            id="headerToggle"
-            aria-controls="primary-menu"
-            aria-expanded={on ? "true" : "false"} // aria-expanded 상태 반영
-            role="button"
-            tabIndex="0"
-            onClick={toggleMenu}
-          >
-            <span></span>
-          </div>
+    <header id="header" ref={headerRef} className={headerClassName} role="banner">
+      <div className="header__inner">
+        <h1 className="header__logo">
+          <a href="/">Youngsun</a>
+        </h1>
+        <nav className="header__nav" role="navigation" aria-label="메인메뉴">
+          <ul className="nav__wrap">
+            {headerNav.map((nav, key) => (
+              <li key={key}>
+                <a href={nav.url} onClick={handleNavClick}>{nav.title}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div
+          className="header__nav__mobile"
+          id="headerToggle"
+          aria-controls="primary-menu"
+          aria-expanded={on ? "true" : "false"}
+          role="button"
+          tabIndex="0"
+          onClick={toggleMenu}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              toggleMenu();
+            }
+          }}
+          
+        >
+          <span></span>
         </div>
+      </div>
     </header>
-  )
-}
+  );
+};
 
 export default Header;

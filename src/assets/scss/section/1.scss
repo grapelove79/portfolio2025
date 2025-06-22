@@ -39,7 +39,6 @@ $font-formats: (
   woff2: 'woff2'
 );
 
-
 // 3. font-face mixin 개선
 @mixin font-face($name, $path, $weight: null, $style: normal, $exts: (eot, woff2, woff, ttf)) {
   @font-face {

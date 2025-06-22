@@ -115,7 +115,7 @@
       }
 
       .title__wrap {
-        height: 100%;
+        height: calc(var(--vh, 1vh) * 100); // 실제 뷰포트 기준 높이
         align-content: center;
       }
 

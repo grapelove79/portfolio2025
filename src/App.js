@@ -13,6 +13,7 @@ const App = () => {
   useEffect(() => {
     smooth();
     link();
+
   }, []);
 
   return (

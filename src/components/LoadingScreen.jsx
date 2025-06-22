@@ -13,10 +13,13 @@ const LoadingScreen = ({ onFinish }) => {
     } else {
 
       setFadeOut(true); // count가 0이면 페이드 아웃 시작
-      const timeout = setTimeout(() => {    // 트랜지션 끝난 후 로딩 종료 콜백 실행 (500ms 후)
-        onFinish();
+      const timeout = setTimeout(() => { // 트랜지션 끝난 후 로딩 종료 콜백 실행(500ms 후)
+
+        //document.body.style.overflow = "auto";  // 스크롤 다시 활성화
+        onFinish();   // 로딩 완료 콜백: 이 타이밍에 App → HomeView → IntroSection 순으로 mount
+
       }, 500);
-      return () => clearTimeout(timeout);
+      return () => clearTimeout(timeout);  // cleanup
     }
   }, [count, onFinish]);
 
