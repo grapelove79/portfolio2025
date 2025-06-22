@@ -27,10 +27,12 @@ const Career = () => {
           {careerText.map((career, key) => (
             <article className={`career__item s${key + 1}`} key={key}>
               <div className="title__wrap">
-                <p className="date">
-                  {career.date}
-                </p>
-                <h3 className="title">{career.title}</h3>
+                <div className="title__inner">
+                  <p className="date">
+                    {career.date}
+                  </p>
+                  <h3 className="title">{career.title}</h3>
+                </div>
               </div>
               <div className="info">
                 <dl><dt>부서명</dt><dd>{career.info[0]}</dd></dl>
