@@ -95,9 +95,13 @@ const IntroSection = () => {
       ScrollTrigger.refresh();
     }, 100);
 
+    const handleLoaded = () => video.classList.add("loaded");
+    video?.addEventListener("loadeddata", handleLoaded);
+
     return () => {
       ctx.revert(); // ScrollTrigger 제거
       clearTimeout(refreshTimeout);  // 언마운트 시 메모리 누수 방지
+      video?.removeEventListener("loadeddata", handleLoaded);
     };
   }, []);
 
@@ -110,7 +114,7 @@ const IntroSection = () => {
         </div>
       </div>
       <div className="video-wrap" ref={videowrapRef}>
-        <video ref={videoRef} src="/intro.mp4" muted playsInline autoPlay loop />
+        <video ref={videoRef} src="/intro.mp4" muted playsInline autoPlay loop preload="auto" />
         <div className="txt_motion_box">
           {intro.map((text, index) => (
             <div

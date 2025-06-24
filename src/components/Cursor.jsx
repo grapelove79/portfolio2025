@@ -82,7 +82,7 @@ const Cursor = () => {
         width: "40px",
         height: "40px",
         pointerEvents: "none", // 실제 클릭 막지 않도록 설정
-        zIndex: 20001,
+        zIndex: 999999,
         transform: "translate(-50%, -50%)",
         transition: "transform 0.2s ease",
         mixBlendMode: "difference",

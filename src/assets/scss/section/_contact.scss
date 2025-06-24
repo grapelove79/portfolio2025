@@ -33,7 +33,6 @@
     height: max(44rem, 4.4vw);
     font-size: 44rem;
     line-height: 1.9;
-
     margin: 0px auto;
     font-size: 44rem;
     font-weight: 900;
@@ -100,7 +99,6 @@
       text-align: center;
       transition: all 0.3s;
       cursor: all-scroll;
-      z-index: 100;
 
       @media (max-width: 1024px) {
         font-size: 22rem;

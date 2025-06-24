@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { headerNav } from "../constants";
 import useAppStore from "../hooks/useAppStore";
-import useScrollBlock from "../hooks/useScrollBlock";
 
 const Header = () => {
   const [on, setOn] = useState(false);
@@ -11,8 +10,6 @@ const Header = () => {
   const { isHeaderHidden, setHeaderHidden, isScrollDisabled } = useAppStore();
   const [isMobile, setIsMobile] = useState(false);
   const headerRef = useRef(null);
-  const isScrollBlocked = useScrollBlock();
-
 
   // 화면 크기 체크
   useEffect(() => {
@@ -37,14 +34,17 @@ const Header = () => {
   // body stop-scroll 클래스 처리
   useEffect(() => {
     console.log("on 상태 변경:", on);
+    const body = document.body;
+    // 방법 1
     if (on) {
-      document.body.classList.add("stop-scroll--menu");
+      body.classList.add("stop-scroll");
     } else {
-      document.body.classList.remove("stop-scroll--menu");
+      body.classList.remove("stop-scroll");
     }
+
+    // 방법 2
+    // on ? body.classList.add("stop-scroll") : body.classList.remove("stop-scroll");
   }, [on]);
-
-
 
   // 외부 클릭 시 닫기
   useEffect(() => {
@@ -70,34 +70,33 @@ const Header = () => {
 
   // 스크롤 방향 감지 및 <body data-scroll="..."> 설정 및 헤더 스크롤 숨김/표시
   useEffect(() => {
-    document.body.setAttribute("data-scroll", scrollDirection); // 기본값 설정
+    document.body.setAttribute("data-scroll", "up"); // 기본값 설정
 
     const handleScroll = () => {
-      const scrollBlocked = isScrollBlocked();
-      if (isScrollDisabled || isScrollBlocked()) return;
+      if (isScrollDisabled) return;
 
       const currentScroll = window.scrollY;
-      // const isMenuOpen =  // 스크롤 차단 여부
-      //   headerRef.current?.classList.contains("on") &&
-      //   document.querySelector(".header__nav__mobile")?.getAttribute("aria-expanded") === "true" &&
-      //   document.body.classList.contains("stop-scroll");
+      const isMenuOpen =
+        headerRef.current?.classList.contains("on") &&
+        document.querySelector(".header__nav__mobile")?.getAttribute("aria-expanded") === "true" &&
+        document.body.classList.contains("stop-scroll");
 
-      // const isMenuOpen = isScrollBlocked(); // 스크롤 차단 여부로 대체
-
-      if (scrollBlocked) {
-        // if (isMenuOpen) {
+      if (isMenuOpen) {
         if (isHeaderHidden) setHeaderHidden(false);
         return;
       }
 
+
       const direction =
-        // currentScroll > lastScrollYRef.current && currentScroll > 0 ? "down" : "up";
-        currentScroll > lastScrollYRef.current && currentScroll ? "down" : "up";
+        currentScroll > lastScrollYRef.current && currentScroll > 0 ? "down" : "up";
 
       if (direction !== scrollDirection) {
         setScrollDirection(direction)
         // if (direction !== scrollDirectionRef.current) {
         // scrollDirectionRef.current = direction;
+
+        // body에 data-scroll 속성 설정
+        document.body.setAttribute("data-scroll", direction);
 
         setHeaderHidden(direction === "down");
 
@@ -105,18 +104,12 @@ const Header = () => {
         // else setHeaderHidden(false);
       }
 
-
       lastScrollYRef.current = currentScroll;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isScrollDisabled, isHeaderHidden, setHeaderHidden, scrollDirection, isScrollBlocked]);
-
-  // useEffect(() => {
-  //   console.log("스크롤 방향:", scrollDirection);
-  //   document.body.setAttribute("data-scroll", scrollDirection);
-  // }, [scrollDirection]);
+  }, [isScrollDisabled, isHeaderHidden, setHeaderHidden, scrollDirection]);
 
   // 모바일 메뉴 클릭 시 닫기
   const handleNavClick = () => {
@@ -156,6 +149,7 @@ const Header = () => {
               toggleMenu();
             }
           }}
+
         >
           <span></span>
         </div>

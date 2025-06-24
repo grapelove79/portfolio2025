@@ -10,29 +10,31 @@ const App = () => {
   // loadingDone: false이면 로딩화면, true이면 메인 콘텐츠 표시
   const [loadingDone, setLoadingDone] = useState(false);
 
+  // loadingDone이 App에서 직접 관리되므로 smooth()와 link()도 정확히 로딩 후 한 번만 실행됩니다.
   useEffect(() => {
-    smooth();
-    link();
-
-  }, []);
+    if (loadingDone) {
+      smooth();
+      link();
+    }
+  }, [loadingDone]);
 
   return (
     <>
       {/* 로딩이 끝나지 않았으면 로딩 화면만 보여줌 */}
-      {!loadingDone && (  // loadingDone 이 true 가 아닌 경우 true
-        <LoadingScreen onFinish={() => setLoadingDone(true)} />
-      )}
-      {/* 로딩이 끝났으면 메인 앱 전체 렌더링 */}
-      {loadingDone && (
-        <BrowserRouter>
-          <Cursor />
-          <Routes>
-            <Route path="/" element={<HomeView />} />
-          </Routes>
-        </BrowserRouter>
+      {!loadingDone ? (  // loadingDone 이 true 가 아닌 경우 true
+        <LoadingScreen onFinish={() => {
+          setLoadingDone(true);
+        }} />
+      ) : (
+      <BrowserRouter>
+        <Cursor />
+        <Routes>
+          <Route path="/" element={<HomeView />} />
+        </Routes>
+      </BrowserRouter>
       )}
     </>
-  )
-}
+  );
+};
 
 export default App;

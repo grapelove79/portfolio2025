@@ -73,7 +73,7 @@
   //  padding: 0 100rem;
   // width: calc(100% - 200rem);
   width: 100%;
- 
+
   @media screen and (max-width: 1024px) {
     // width: calc(100% - 40rem);
     // padding: 0 20rem;
@@ -215,7 +215,9 @@
 }
 
 body {
-  &.stop-scroll {
+
+  &.stop-scroll__loading,
+  .stop-scroll--menu {
     overflow: hidden;
     height: 100%;
     touch-action: none;
