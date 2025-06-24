@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoadingScreen from "./components/LoadingScreen";
 import HomeView from './views/HomeView'; // 실제 메인 페이지 컴포넌트
