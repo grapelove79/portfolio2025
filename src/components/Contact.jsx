@@ -1,34 +1,36 @@
-import React, { useEffect } from "react";
+import React from "react";
+// import React, { useEffect } from "react";
 import { contactText } from "../constants";
 
 const Contact = () => {
-  useEffect(() => {
-    const targets = document.querySelectorAll(".contact__motion");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const item = entry.target;
-          if (entry.isIntersecting && !item.classList.contains("active")) {
-            item.classList.add("active");
-             // 한 번 활성화되면 더 이상 관찰 중지 (once 효과)
-            observer.unobserve(item);
-          } 
+  // useEffect(() => {
+  //   const targets = document.querySelectorAll(".contact__motion");
+  //   const observer = new IntersectionObserver(
+  //     (entries) => {
+  //       entries.forEach((entry) => {
+  //         const item = entry.target;
+  //         if (entry.isIntersecting && !item.classList.contains("active")) {
+  //           item.classList.add("active");
+  //            // 한 번 활성화되면 더 이상 관찰 중지 (once 효과)
+  //           observer.unobserve(item);
+  //         } 
           
-          // else if (!entry.isIntersecting && item.classList.contains("active")) {
-          //   item.classList.remove("active");
-          // }
-        });
-      },
-      {
-        threshold: 0.5, // 50% 이상 보여야 적용
-      }
-    );
 
-    // 각각의 요소를 관찰 
-    targets.forEach((el) => observer.observe(el));
-    // if (target) observer.observe(target);
-    return () => observer.disconnect();
-  }, []);
+  //         // else if (!entry.isIntersecting && item.classList.contains("active")) {
+  //         //   item.classList.remove("active");
+  //         // }
+  //       });
+  //     },
+  //     {
+  //       threshold: 0.5, // 50% 이상 보여야 적용
+  //     }
+  //   );
+
+  //   // 각각의 요소를 관찰 
+  //   targets.forEach((el) => observer.observe(el));
+  //   // if (target) observer.observe(target);
+  //   return () => observer.disconnect();
+  // }, []);
 
   return (
     <section id="contact">
