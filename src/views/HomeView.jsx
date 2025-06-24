@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../components/Header";
+import Header from "../components/Header00";
 import Skip from "../components/Skip";
 import IntroSection from "../components/IntroSection";
 import Intro from "../components/Intro";

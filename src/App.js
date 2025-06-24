@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoadingScreen from "./components/LoadingScreen";
 import HomeView from './views/HomeView'; // 실제 메인 페이지 컴포넌트
-import smooth from "./utils/smooth";
-// import link from "./utils/link";
+// import smooth from "./utils/smooth";
+import { enableLenisAnchors } from "./utils/lenis-anchors";
 import Cursor from "./components/Cursor";
 
 const App = () => {
@@ -13,8 +13,7 @@ const App = () => {
   // loadingDone이 App에서 직접 관리되므로 smooth()와 link()도 정확히 로딩 후 한 번만 실행됩니다.
   useEffect(() => {
     if (loadingDone) {
-      smooth();
-      // link();
+      enableLenisAnchors();
     }
   }, [loadingDone]);
 
