@@ -100,7 +100,7 @@
       width: calc(100% - 40rem);
     }
 
-    [data-motionactive] {
+    .intro__motion {
       transform: translateY(70rem);
       opacity: 0;
       transition-property: transform, opacity;

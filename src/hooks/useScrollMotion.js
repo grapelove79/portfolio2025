@@ -10,7 +10,7 @@ const useScrollMotion = () => {
 
       elements.forEach((item, idx) => {
         ScrollTrigger.create({
-          id: "motion-" + idx,
+          // id: "motion-" + idx,
           trigger: item,
           scrub: 0.5,
           start: "top 75%",

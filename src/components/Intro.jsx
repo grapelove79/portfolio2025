@@ -10,11 +10,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Intro = () => {
   useEffect(() => {
-    const elements = document.querySelectorAll("[data-motionactive]");
+    const elements = document.querySelectorAll(".intro__motion");
 
     elements.forEach((item, idx) => {
       ScrollTrigger.create({
-        id: "intro" + idx,
+        // id: "intro" + idx,
         trigger: item,
         scrub: 0.5,
         start: "top 90%",
@@ -37,27 +37,27 @@ const Intro = () => {
   return (
     <section id="intro">
       <div className="intro__inner">
-        <div className="title__box" data-motionactive>
+        <div className="title__box intro__motion">
           <h2 className="intro__title">
             <strong>{introText.title[0]}</strong>
             <strong>{introText.title[1]}</strong>
           </h2>
         </div>
         <div className="intro__text">
-          <div className="img" data-motionactive>
+          <div className="img intro__motion">
             <img src={profile} alt="어바웃" />
           </div>
-          <h3 className="title" data-motionactive>
+          <h3 className="title intro__motion">
             {introText.subtitle}
           </h3>
           <div className="text">
-            <div data-motionactive>
+            <div className="intro__motion">
               <ResponsiveText
                 text={introText.desc[0]}
                 as="p"
               />
             </div>
-            <div data-motionactive>
+            <div className="intro__motion">
               <ResponsiveText
                 text={introText.desc[1]}
                 as="p"
