@@ -52,7 +52,7 @@ const IntroSection = () => {
           trigger: containerRef.current,
           start: "top top",
           end: "400% top",              // 이전 end:"400% top"
-          scrub: 0.3,                  // 스크롤과 애니메이션 동기화 (부드럽게 연결)
+          scrub: false,                  // 스크롤과 애니메이션 동기화 (부드럽게 연결)
           pin: true,
           invalidateOnRefresh: true,
           // markers: true,

@@ -12,10 +12,10 @@ const useScrollMotion = () => {
         ScrollTrigger.create({
           // id: "motion-" + idx,
           trigger: item,
-          scrub: false,
           start: "top 75%",
           end: "bottom top",
-          once: true,
+          once: false,
+          scrub: false,
           // markers: true,
           invalidateOnRefresh: true,
           onEnter: () => {

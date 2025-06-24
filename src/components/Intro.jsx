@@ -16,9 +16,9 @@ const Intro = () => {
       ScrollTrigger.create({
         // id: "intro" + idx,
         trigger: item,
-        scrub: false,
         start: "top 90%",
-        once: true,
+        scrub: false,
+        once: false,
         invalidateOnRefresh: true,
         // markers: true,
         onEnter: () => {

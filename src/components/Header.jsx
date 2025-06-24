@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { headerNav } from "../constants";
 import useAppStore from "../hooks/useAppStore";
 import useScrollBlock from "../hooks/useScrollBlock";
-import { lenis } from "../utils/lenis-anchors"; // lenis 부드러운 스크롤 인스턴스 import
 import useIsMobile from "../hooks/useIsMobile";  // useIsMobile 훅 import
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import lenis from "../utils/smooth";
 
 const Header = () => {
   const isMobile = useIsMobile();

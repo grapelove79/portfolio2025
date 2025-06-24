@@ -32,13 +32,13 @@ const Skill = () => {
             trigger: el,
             start: "top 80%",
             end: "bottom bottom",
-            once: true,
+            once: false,
             // end: "bottom 100%", // 필요 시 조정
             toggleActions: "play none none none", // 보장용
             invalidateOnRefresh: true,
             // markers: true,
             onEnter: () => {
-              console.log("ENTER:", el);
+              // console.log("ENTER:", el);
               gsap.to(el, {
                 y: "0rem",
                 opacity: 1,
