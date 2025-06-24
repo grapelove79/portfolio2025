@@ -51,6 +51,7 @@
       transition-duration: 1.2s;
       transition-timing-function: cubic-bezier(0.41, 0.01, 0.16, 1.01);
       background-color: var(--white);
+      will-change: transform;
 
       &:first-of-type {
         transform: translateX(calc(max(66px, 6.6vw) * -1));
@@ -107,6 +108,7 @@
       transition-duration: 1.2s;
       transition-timing-function: cubic-bezier(0.41, 0.01, 0.16, 1.01);
       background-color: var(--white);
+      will-change: transform, opacity;
 
       &.active {
         transform: translateY(0);

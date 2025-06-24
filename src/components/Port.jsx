@@ -61,7 +61,8 @@ const Port = () => {
         start: "top top",
         end: () => `+=${workW}`, // 섹션 너비만큼 스크롤 거리 생성
         pin: true,
-        scrub: true,
+        // scrub: true,
+        scrub: 1,
         invalidateOnRefresh: true,
         // markers: true,
       },

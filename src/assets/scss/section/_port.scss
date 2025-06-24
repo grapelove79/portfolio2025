@@ -72,7 +72,6 @@
     width: max-content;
     z-index: 1;
     display: flex;
-    will-change: transform; // 성능 최적화
 
     @media screen and (max-width: 1024px) {
       left: 20rem;

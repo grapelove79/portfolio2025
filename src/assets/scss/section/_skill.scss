@@ -81,6 +81,7 @@
       text-align: center;
       grid-column-end: 2 span;
       padding-top: 30rem;
+      will-change: transform, opacity;
 
       @media screen and (max-width: 1024px) {
         border-radius: 20rem;

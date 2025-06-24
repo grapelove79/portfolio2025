@@ -20,7 +20,7 @@ const Contact = () => {
       }
     );
 
-    // ✅ 각각의 요소를 관찰 
+    // 각각의 요소를 관찰 
     targets.forEach((el) => observer.observe(el));
     // if (target) observer.observe(target);
     return () => observer.disconnect();
