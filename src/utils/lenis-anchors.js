@@ -11,17 +11,18 @@ function raf(time) {
 }
 requestAnimationFrame(raf);
 
-const enableLenisAnchors = () => {
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", (e) => {
-      const hash = anchor.getAttribute("href");
-      const target = document.querySelector(hash);
-      if (target) {
-        e.preventDefault();
-        lenis.scrollTo(target); // Lenis를 통한 부드러운 이동
-      }
-    });
-  });
-};
+// const enableLenisAnchors = () => {
+//   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+//     anchor.addEventListener("click", (e) => {
+//       const hash = anchor.getAttribute("href");
+//       const target = document.querySelector(hash);
+//       if (target) {
+//         e.preventDefault();
+//         lenis.scrollTo(target); // Lenis를 통한 부드러운 이동
+//       }
+//     });
+//   });
+// };
 
-export { lenis, enableLenisAnchors };
+export { lenis };
+// export { lenis, enableLenisAnchors };
