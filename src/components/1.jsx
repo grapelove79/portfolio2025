@@ -1,128 +1,214 @@
+// Sec01.jsx
 import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-import { intro } from "../constants";
-import ResponsiveText from "../components/ResponsiveText";
-
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import $ from "jquery";
 gsap.registerPlugin(ScrollTrigger);
 
-const IntroSection = () => {
-  const bannerRef = useRef(null);
-  const containerRef = useRef(null);
-  const videowrapRef = useRef(null);
-  const videoRef = useRef(null);
-  const textRefs = useRef([]);
+const Sec01 = () => {
+  const sec01Ref = useRef(null);
+  const bannerBoxRef = useRef(null);
+  const txtMotionBoxRef = useRef(null);
+  const videoWrapRef = useRef(null);
 
-  // 1. 브라우저 크기에 따라 배너 클래스 resize 조정
   useEffect(() => {
     const handleResize = () => {
       const widthW = window.innerWidth;
       const heightH = window.innerHeight;
+      const bannerBox = bannerBoxRef.current;
 
-      if (bannerRef.current) {
-        if (widthW > heightH) {
-          bannerRef.current.classList.add("widthW");
-          bannerRef.current.classList.remove("heightH");
-        } else {
-          bannerRef.current.classList.add("heightH");
-          bannerRef.current.classList.remove("widthW");
-        }
+      if (widthW > heightH) {
+        bannerBox.classList.remove("heightH");
+        bannerBox.classList.add("widthW");
+      } else {
+        bannerBox.classList.add("heightH");
+        bannerBox.classList.remove("widthW");
       }
     };
 
+    window.addEventListener("load", handleResize);
     window.addEventListener("resize", handleResize);
     handleResize();
 
     return () => {
+      window.removeEventListener("load", handleResize);
       window.removeEventListener("resize", handleResize);
     };
   }, []);
 
-  // 2. ScrollTrigger 애니메이션 설정 및 상태 관리
   useEffect(() => {
-    const video = videoRef.current;
-    video.loop = true;
-    video.muted = true;
-    video.play();
+    const $sec01 = $(sec01Ref.current);
+    const $bannerBox = $(bannerBoxRef.current);
+    const $txtMotionBox = $(txtMotionBoxRef.current);
+    const $videoWrap = $(videoWrapRef.current);
 
-    const ctx = gsap.context(() => {
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "400% top",
-          scrub: true,
-          pin: true,
-          invalidateOnRefresh: true,
-          // markers: true,
-          onUpdate: (self) => {
-            const degree = self.progress * 100;
-            const progress = Math.floor(degree);
+    gsap.timeline({
+      scrollTrigger: {
+        id: "sec01",
+        trigger: $sec01,
+        pin: true,
+        start: "top top",
+        end: "400% top",
+        scrub: true,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          const progress = Math.floor(self.progress * 100);
 
-            const banner = bannerRef.current;
-            const videoEl = videowrapRef.current;
-
-            if (self.direction === -1) {
-              if (progress === 1) banner?.classList.remove("active");
-              if (progress < 10) textRefs.current[0]?.classList.remove("active");
-              if (progress < 35) textRefs.current[0]?.classList.remove("none");
-              if (progress < 55) textRefs.current[1]?.classList.remove("active");
-              if (progress < 80) videoEl?.classList.remove("active");
-            } else {
-              if (progress > 1) banner?.classList.add("active");
-              if (progress > 10) textRefs.current[0]?.classList.add("active");
-              if (progress > 35) textRefs.current[0]?.classList.add("none");
-              if (progress > 55) textRefs.current[1]?.classList.add("active");
-              if (progress > 80) videoEl?.classList.add("active");
-            }
-          },
+          if (self.direction === -1) {
+            if (progress === 0) $bannerBox.removeClass("active");
+            if (progress < 10) $txtMotionBox.find(".txt_motion01").removeClass("active");
+            if (progress < 35) $txtMotionBox.find(".txt_motion01").removeClass("none");
+            if (progress < 55) $txtMotionBox.find(".txt_motion02").removeClass("active");
+            if (progress < 80) $videoWrap.removeClass("active");
+          } else {
+            if (progress > 1) $bannerBox.addClass("active");
+            if (progress > 10) $txtMotionBox.find(".txt_motion01").addClass("active");
+            if (progress > 35) $txtMotionBox.find(".txt_motion01").addClass("none");
+            if (progress > 55) $txtMotionBox.find(".txt_motion02").addClass("active");
+            if (progress > 80) $videoWrap.addClass("active");
+          }
         },
-      });
+      },
+    }).to($sec01, {
+      opacity: 1,
+      duration: 3.5,
+    });
 
-      timeline.to(containerRef.current, {
-        opacity: 1,
-        duration: 3.5,
-      });
-    }, containerRef);
+    $("#wave1").wavify({
+      height: 10,
+      bones: 1,
+      amplitude: 50,
+      color: "transparent",
+      speed: 0.15,
+    });
 
-    // 🔥 핵심 추가: ScrollTrigger 위치 초기화 (로딩 직후 렌더 지연 문제 방지)
-    const refreshTimeout = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 100);
-
-    return () => {
-      ctx.revert();
-      clearTimeout(refreshTimeout);
-    };
+    $("#wave2").wavify({
+      height: 10,
+      bones: 1,
+      amplitude: 45,
+      color: "transparent",
+      speed: 0.25,
+    });
   }, []);
 
   return (
-    <section className="video-section" ref={containerRef}>
-      <div className="banner-box" ref={bannerRef}>
-        <div className="banner-inner">
-          <p>2025</p>
-          <strong>Portfolio</strong>
-        </div>
+    <section ref={sec01Ref} className="sec01">
+      <div ref={bannerBoxRef} className="banner_box"></div>
+      <div ref={txtMotionBoxRef} className="txt_motion_box">
+        <div className="txt_motion01">TEXT 01</div>
+        <div className="txt_motion02">TEXT 02</div>
       </div>
-      <div className="video-wrap" ref={videowrapRef}>
-        <video ref={videoRef} src="/intro.mp4" muted playsInline autoPlay loop />
-        <div className="txt_motion_box">
-          {intro.map((text, index) => (
-            <div
-              key={index}
-              className={`txt_motion txt_motion0${index + 1}`}
-              ref={(el) => (textRefs.current[index] = el)}
-            >
-              <strong>{text.title}</strong>
-              <div>
-                <ResponsiveText text={text.desc} as="p" />
-              </div>
-            </div>
-          ))}
+      <div ref={videoWrapRef} className="video_wrap">
+        <video muted autoPlay loop>
+          <source src="/video/sample.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <svg id="wave1" />
+      <svg id="wave2" />
+    </section>
+  );
+};
+
+export default Sec01;
+
+
+// Sec03.jsx
+import React, { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
+const isTouchDevice = () => {
+  return "ontouchstart" in window || navigator.maxTouchPoints > 0;
+};
+
+const Sec03 = () => {
+  const sec03Ref = useRef(null);
+  const listWrapRef = useRef(null);
+  const listScrollRef = useRef(null);
+
+  useEffect(() => {
+    const motion = () => {
+      const windowWidth = window.innerWidth;
+      const sec03 = sec03Ref.current;
+      const listWrap = listWrapRef.current;
+      const scrollTarget = windowWidth > 1023 && !isTouchDevice() ? listScrollRef.current : listWrap;
+      const moveY = listWrap.scrollHeight - sec03.clientHeight;
+
+      gsap.timeline({
+        scrollTrigger: {
+          id: "listMotion",
+          trigger: sec03,
+          pin: true,
+          start: "top top",
+          end: "250% 10%",
+          scrub: true,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const progress = Math.floor(self.progress * 100);
+            if (self.direction === -1 && progress < 25) {
+              sec03.classList.remove("active");
+            } else if (self.direction === 1 && progress > 10) {
+              sec03.classList.add("active");
+            }
+          },
+        },
+      })
+        .to(sec03, { opacity: 1, duration: 0.3 })
+        .to(sec03, { backgroundPosition: "0 70%" })
+        .to(scrollTarget, { y: `-${moveY}` }, "<");
+    };
+
+    motion();
+    const handleResize = () => {
+      if (window.innerWidth > 1023 && !isTouchDevice()) {
+        ScrollTrigger.getAll().forEach((st) => {
+          if (st.vars.id === "listMotion") {
+            st.kill();
+          }
+        });
+        motion();
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return (
+    <section ref={sec03Ref} className="sec03">
+      <div ref={listWrapRef} className="list_scroll_wrap">
+        <div ref={listScrollRef} className="list_scroll">
+          {/* List Content */}
         </div>
       </div>
     </section>
   );
 };
 
-export default IntroSection;
+export default Sec03;
+
+
+// ScrollActiveInitializer.jsx
+import { useEffect } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+const ScrollActiveInitializer = () => {
+  useEffect(() => {
+    document.querySelectorAll("[data-motionActive]").forEach((el, idx) => {
+      ScrollTrigger.create({
+        id: "sec" + idx,
+        trigger: el,
+        scrub: 0.5,
+        start: "top 90%",
+        invalidateOnRefresh: true,
+        onEnter: () => el.classList.add("active"),
+        onLeaveBack: () => el.classList.remove("active"),
+      });
+    });
+  }, []);
+
+  return null;
+};
+
+export default ScrollActiveInitializer;

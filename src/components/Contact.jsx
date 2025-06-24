@@ -31,7 +31,7 @@ const Contact = () => {
   }, []);
 
   return (
-    <section id="contact">
+    <section id="contact" className="contact">
       <div className="contact__inner">
         <h2 className="contact__title contact__motion">연락 <em>Contact</em></h2>
         <div className="contact__wrap contact__motion">

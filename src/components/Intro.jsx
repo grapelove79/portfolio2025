@@ -38,7 +38,7 @@ const Intro = () => {
   }, []);
 
   return (
-    <section id="intro">
+    <section id="intro" className="intro">
       <div className="intro__inner">
         <div className="title__box intro__motion">
           <h2 className="intro__title">

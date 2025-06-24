@@ -20,7 +20,7 @@ const Career = () => {
   }, []);
 
   return (
-    <section id="career">
+    <section id="career" className="career">
       <div className="career__inner">
         <h2 className="career__title scroll__motion">경력 <em>Career</em></h2>
         <div className="career__wrap scroll__motion">

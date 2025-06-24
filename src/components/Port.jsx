@@ -76,7 +76,7 @@ const Port = () => {
   }, [dimensions]);
 
   return (
-    <section id="port">
+    <section id="port" className="port">
       <div className="port__inner" ref={horizontalRef}>
         <h2 className="port__title scroll__motion" ref={titleRef}>
           포트폴리오 <em>Portfolio</em>

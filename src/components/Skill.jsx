@@ -26,15 +26,15 @@ const Skill = () => {
           //el이 없으면(return falsey)이면, 아래 코드를 실행하지 말고 해당 forEach 반복을 종료해라
           //el이 없으면 무시하고 다음으로
 
-          gsap.set(el, { y: "90rem", opacity: 0 });
+          gsap.set(el, { y: "70rem", opacity: 0 });
 
           ScrollTrigger.create({
             trigger: el,
             start: "top 80%",
             end: "bottom bottom",
-            once: false,
             // end: "bottom 100%", // 필요 시 조정
-            toggleActions: "play none none none", // 보장용
+            // toggleActions: "play none none reverse", // 보장용
+            // once: true,
             invalidateOnRefresh: true,
             // markers: true,
             onEnter: () => {
@@ -49,7 +49,7 @@ const Skill = () => {
             },
             onLeaveBack: () => {
               gsap.to(el, {
-                y: "90rem",
+                y: "70rem",
                 opacity: 0,
                 duration: 0.6,
                 ease: "power2.out",
@@ -69,7 +69,7 @@ const Skill = () => {
   }, []);
 
   return (
-    <section id="skill" ref={skillRef}>
+    <section id="skill" className="skill" ref={skillRef}>
       <div className="skill__inner" >
         <h2 className="skill__title scroll__motion">
           기술 <em>Skills</em>

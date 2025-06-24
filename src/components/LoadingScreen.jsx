@@ -27,7 +27,7 @@ const LoadingScreen = ({ onFinish }) => {
   }, [count, onFinish]);
 
   return (
-    <section id="loading" className={`${fadeOut ? "fade-out" : ""}`}>
+    <section id="loading" className={`loading ${fadeOut ? "fade-out" : ""}`}>
       <div className="loading-screen">
         <div className='img'></div>
         <p><span>{count}</span>... 로딩 중</p>

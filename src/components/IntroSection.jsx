@@ -106,7 +106,7 @@ const IntroSection = () => {
   }, []);
 
   return (
-    <section className="video-section" ref={containerRef}>
+    <section id="home" className="video-section" ref={containerRef}>
       <div className="banner-box" ref={bannerRef}>
         <div className="banner-inner">
           <p>2025</p>
