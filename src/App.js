@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoadingScreen from "./components/LoadingScreen";
 import HomeView from './views/HomeView'; // 실제 메인 페이지 컴포넌트
 import smooth from "./utils/smooth";
-import link from "./utils/link";
+// import link from "./utils/link";
 import Cursor from "./components/Cursor";
 
 const App = () => {
@@ -14,7 +14,7 @@ const App = () => {
   useEffect(() => {
     if (loadingDone) {
       smooth();
-      link();
+      // link();
     }
   }, [loadingDone]);
 

@@ -28,7 +28,7 @@ const Intro = () => {
         },
       });
     })
-    // 💡 ScrollTrigger 정리
+    // ScrollTrigger 정리
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
