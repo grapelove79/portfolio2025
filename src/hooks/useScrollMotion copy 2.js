@@ -25,7 +25,6 @@ const useScrollMotion = () => {
             item.classList.remove("active");
           },
         });
-        ScrollTrigger.refresh(); // 위치 정보 갱신
       });
       // ScrollTrigger 정리
       return () => {

@@ -4,6 +4,7 @@ import useAppStore from "../hooks/useAppStore";
 import useScrollBlock from "../hooks/useScrollBlock";
 import { lenis } from "../utils/lenis-anchors"; // lenis 부드러운 스크롤 인스턴스 import
 import useIsMobile from "../hooks/useIsMobile";  // useIsMobile 훅 import
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const Header = () => {
   const isMobile = useIsMobile();
@@ -103,7 +104,9 @@ const Header = () => {
                       // 스크롤 완료 후 메뉴 닫기 이벤트 등록
                       const onScrollEnd = () => {
                         setOn(false);
-                        lenis.off("scrollEnd", onScrollEnd); // 스크롤 애니메이션 종료 시점에 메뉴 닫기(
+                        lenis.off("scrollEnd", onScrollEnd); // 스크롤 애니메이션 종료 시점에 메뉴 닫기
+
+                        ScrollTrigger.refresh(); // scrollTo 후 ScrollTrigger 위치 다시 계산
                       };
                       lenis.on("scrollEnd", onScrollEnd);
 
