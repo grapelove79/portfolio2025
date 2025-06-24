@@ -35,8 +35,10 @@ const Contact = () => {
   return (
     <section id="contact">
       <div className="contact__inner">
-        <h2 className="contact__title contact__motion">연락 <em>Contact</em></h2>
-        <div className="contact__wrap contact__motion">
+        <h2 className="contact__title">연락 <em>Contact</em></h2>
+        {/* <h2 className="contact__title contact__motion">연락 <em>Contact</em></h2> */}
+        <div className="contact__wrap">
+        {/* <div className="contact__wrap contact__motion"> */}
           <p className="contact__desc">제 포트폴리오를 봐주셔서 감사합니다.</p>
           {contactText.map((contact, key) => (
             <div className="contact__mail" key={key}>
