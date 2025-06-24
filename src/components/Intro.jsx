@@ -18,6 +18,7 @@ const Intro = () => {
         trigger: item,
         scrub: false,
         start: "top 90%",
+        once: true,
         invalidateOnRefresh: true,
         // markers: true,
         onEnter: () => {

@@ -15,7 +15,7 @@ const useScrollMotion = () => {
           scrub: false,
           start: "top 75%",
           end: "bottom top",
-          // once: true,
+          once: true,
           // markers: true,
           invalidateOnRefresh: true,
           onEnter: () => {

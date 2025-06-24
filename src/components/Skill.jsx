@@ -32,8 +32,9 @@ const Skill = () => {
             trigger: el,
             start: "top 80%",
             end: "bottom bottom",
+            once: true,
             // end: "bottom 100%", // 필요 시 조정
-            toggleActions: "play none none reverse", // 보장용
+            toggleActions: "play none none none", // 보장용
             invalidateOnRefresh: true,
             // markers: true,
             onEnter: () => {

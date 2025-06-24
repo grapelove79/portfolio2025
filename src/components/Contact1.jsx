@@ -10,12 +10,9 @@ const Contact = () => {
           const item = entry.target;
           if (entry.isIntersecting && !item.classList.contains("active")) {
             item.classList.add("active");
-          }  // 한 번 활성화되면 더 이상 관찰 중지 (once 효과)
+            // 한 번 활성화되면 더 이상 관찰 중지 (once 효과)
             observer.unobserve(item);
-          
-          // else if (!entry.isIntersecting && item.classList.contains("active")) {
-          //   item.classList.remove("active");
-          // }
+          }
         });
       },
       {
@@ -23,9 +20,7 @@ const Contact = () => {
       }
     );
 
-    // 각각의 요소를 관찰 
     targets.forEach((el) => observer.observe(el));
-    // if (target) observer.observe(target);
     return () => observer.disconnect();
   }, []);
 
