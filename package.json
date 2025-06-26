@@ -1,7 +1,7 @@
 {
   "name": "portfolio2025",
   "version": "0.1.0",
-  "homepage": "https://ys-portfolio.netlify.app", 
+  "homepage": "https://ys-portfolio.netlify.app",
   "private": true,
   "dependencies": {
     "@studio-freight/lenis": "^1.0.42",
