@@ -23,17 +23,17 @@ const Header = () => {
 
   // 메뉴 열기/닫기
   const toggleMenu = () => {
-  if (!isMobile) return;
+    if (!isMobile) return;
 
-   // useState가 기본값이 false이기 때문에 
-      // prevShow가 false 이면 => prevShow를 반대(!)로 true 로 해주고,
-      // prevShow가 true 이면 => prevShow를 반대(!)로 false 로 해줘라!
-  setOn(prev => {
-    const next = !prev;
-    console.log("toggleMenu: ", next);
-    return next;
-  });
-};
+    // useState가 기본값이 false이기 때문에 
+    // prevShow가 false 이면 => prevShow를 반대(!)로 true 로 해주고,
+    // prevShow가 true 이면 => prevShow를 반대(!)로 false 로 해줘라!
+    setOn(prev => {
+      const next = !prev;
+      console.log("toggleMenu: ", next);
+      return next;
+    });
+  };
 
   // aria-expanded 상태에 따라 body 클래스 추가/제거
   useEffect(() => {
@@ -98,44 +98,44 @@ const Header = () => {
   return (
     <header id="header" className={headerClassName} role="banner">
       {/* <header id="header" role="banner" className={isHeaderHidden ? "hide" : ""}> */}
-       <div className="header__inner">
-          <h1 className="header__logo">
-            <a href="/">Youngsun</a>
-          </h1>
-          {/* PC & 모바일 공통 네비게이션 */}
-          {/* show의 값이 true 면 show 가 붙고 아니면 아무것도 없게 "" 처리  */}
-          <nav
-            className="header__nav"
-            role="navigation"
-            aria-label="메인메뉴"
-          >
-            <ul className="nav__wrap">
-              {headerNav.map((nav, key) => (
-                <li key={key}>
-                  <a href={nav.url} onClick={handleNavClick}>{nav.title}</a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          {/* 모바일 메뉴 토글 버튼 */}
-          <div
-            className="header__nav__mobile"
-            id="headerToggle"
-            aria-controls="primary-menu"
-            aria-expanded={on ? "true" : "false"} // aria-expanded 상태 반영
-            role="button"
-            tabIndex="0"
-            onClick={toggleMenu}  //접근성 및 키보드 대응 
-  onKeyDown={(e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      toggleMenu();
-    }
-  }}
+      <div className="header__inner">
+        <h1 className="header__logo">
+          <a href="/">Youngsun</a>
+        </h1>
+        {/* PC & 모바일 공통 네비게이션 */}
+        {/* show의 값이 true 면 show 가 붙고 아니면 아무것도 없게 "" 처리  */}
+        <nav
+          className="header__nav"
+          role="navigation"
+          aria-label="메인메뉴"
+        >
+          <ul className="nav__wrap">
+            {headerNav.map((nav, key) => (
+              <li key={key}>
+                <a href={nav.url} onClick={handleNavClick}>{nav.title}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        {/* 모바일 메뉴 토글 버튼 */}
+        <div
+          className="header__nav__mobile"
+          id="headerToggle"
+          aria-controls="primary-menu"
+          aria-expanded={on ? "true" : "false"} // aria-expanded 상태 반영
+          role="button"
+          tabIndex="0"
+          onClick={toggleMenu}  //접근성 및 키보드 대응 
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              toggleMenu();
+            }
+          }}
 
-          >
-            <span></span>
-          </div>
+        >
+          <span></span>
         </div>
+      </div>
     </header>
   )
 }

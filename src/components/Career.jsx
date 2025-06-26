@@ -1,6 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { careerText } from "../constants";
 import useScrollMotion from "../hooks/useScrollMotion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// GSAP 플러그인 등록
+gsap.registerPlugin(ScrollTrigger);
 
 const Career = () => {
   useScrollMotion(); // 커스텀 훅 
@@ -19,11 +24,93 @@ const Career = () => {
     return () => window.removeEventListener('resize', setVh);
   }, []);
 
+
+  const careerRef = useRef(null);
+
+  useEffect(() => {
+    ScrollTrigger.matchMedia({
+      "(min-width: 1025px)": function () {
+        gsap.timeline({
+          scrollTrigger: {
+            id: "career",
+            trigger: careerRef.current,
+            pin: true,
+            start: "top top",
+            end: "500% bottom",
+            scrub: true,
+            invalidateOnRefresh: true,
+          },
+        })
+          .to(careerRef.current.querySelectorAll(".career__wrap article")[0], {
+            top: 0,
+          })
+          .to(careerRef.current.querySelectorAll(".career__wrap article")[0], {
+            scale: 0.88,
+          })
+          .to(careerRef.current.querySelectorAll(".career__wrap article")[0].querySelector(".bg"), {
+            opacity: 1,
+          }, "<")
+          .to(careerRef.current.querySelectorAll(".career__wrap article")[1], {
+            top: "8.4%",
+          }, "=-.4")
+          .to(careerRef.current.querySelectorAll(".career__wrap article")[1], {
+            scale: 0.94,
+          }, "=-.2")
+          .to(careerRef.current.querySelectorAll(".career__wrap article")[1].querySelector(".bg"), {
+            opacity: 1,
+          }, "<")
+          .to(careerRef.current.querySelectorAll(".career__wrap article")[2], {
+            top: "16.8%",
+          }, "=-.2");
+      },
+
+      "(max-width: 1024px)": function () {
+        gsap.timeline({
+          scrollTrigger: {
+            id: "career",
+            trigger: careerRef.current,
+            pin: true,
+            start: "top top",
+            end: "300% bottom",
+            scrub: true,
+            invalidateOnRefresh: true,
+          },
+        })
+          .to(careerRef.current.querySelectorAll(".career__wrap article")[0], {
+            top: 0,
+          })
+          .to(careerRef.current.querySelectorAll(".career__wrap article")[0], {
+            scale: 0.88,
+          })
+          .to(careerRef.current.querySelectorAll(".career__wrap article")[0].querySelector(".bg"), {
+            opacity: 1,
+          }, "<")
+          .to(careerRef.current.querySelectorAll(".career__wrap article")[1], {
+            top: "8.4%",
+          }, "=-.4")
+          .to(careerRef.current.querySelectorAll(".career__wrap article")[1], {
+            scale: 0.94,
+          }, "=-.2")
+          .to(careerRef.current.querySelectorAll(".career__wrap article")[1].querySelector(".bg"), {
+            opacity: 1,
+          }, "<")
+          .to(careerRef.current.querySelectorAll(".career__wrap article")[2], {
+            top: "16.8%",
+          }, "=-.2");
+      },
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
+
+
   return (
-    <section id="career" className="career">
+    <section id="career" className="career" ref={careerRef}>
       <div className="career__inner">
-        <h2 className="career__title scroll__motion">경력 <em>Career</em></h2>
-        <div className="career__wrap scroll__motion">
+        <h2 className="career__title">경력 <em>Career</em></h2>
+        <div className="career__wrap">
           {careerText.map((career, key) => (
             <article className={`career__item s${key + 1}`} key={key}>
               <div className="title__wrap">

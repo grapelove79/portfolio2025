@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useLayoutEffect, useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import useScrollMotion from "../hooks/useScrollMotion";
@@ -68,12 +68,43 @@ const Skill = () => {
     return () => clearTimeout(timeout);
   }, []);
 
+  useEffect(() => {
+    const matchMedia = ScrollTrigger.matchMedia({
+      // 데스크탑 이상에서만 ScrollTrigger 적용
+      "(min-width: 1025px)": function () {
+        ScrollTrigger.create({
+          trigger:skillRef.current,
+          start: "top top",
+          end: "60% top",
+          pin: ".sticky__wrap",
+          pinSpacing: true,
+          markers: true,
+        });
+      },
+
+      // 모바일/태블릿에서는 ScrollTrigger 제거 (필요 시 cleanup도 가능)
+      "(max-width: 1024px)": function () {
+       // `.sticky__wrap`에 pin 제거를 위해 초기화 조치
+       gsap.set(".sticky__wrap", { clearProps: "all" });
+      },
+    });
+
+    // 컴포넌트 언마운트 시 ScrollTrigger 전부 제거
+    return () => {
+      matchMedia.revert(); // matchMedia context 제거
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
+
   return (
     <section id="skill" className="skill" ref={skillRef}>
-      <div className="skill__inner" >
-        <h2 className="skill__title scroll__motion">
-          기술 <em>Skills</em>
-        </h2>
+      <div className="skill__inner section--one" >
+        <div className="sticky__wrap">
+          <h2 className="skill__title">
+         기술 <em>Skills</em>
+          </h2>
+        </div>
+
         <div className="skill__desc">
           <ul className="skill__list" >
             {skill.map((item, index) => (

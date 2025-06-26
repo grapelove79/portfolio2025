@@ -5,11 +5,22 @@ import useIsMobile from "../hooks/useIsMobile";
 
 const Header = () => {
   const [on, setOn] = useState(false);
-  const [scrollDirection, setScrollDirection] = useState("up"); // 스크롤 방향 상태
+  const [scrollDirection, setScrollDirection] = useState("up"); // ✅ 스크롤 방향 상태
   const lastScrollYRef = useRef(0);
   const { isHeaderHidden, setHeaderHidden, isScrollDisabled } = useAppStore();
+  // const [isMobile, setIsMobile] = useState(false);
    const isMobile = useIsMobile();
   const headerRef = useRef(null);
+
+  // 화면 크기 체크
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setIsMobile(window.innerWidth <= 1024);
+  //   };
+  //   handleResize();
+  //   window.addEventListener("resize", handleResize);
+  //   return () => window.removeEventListener("resize", handleResize);
+  // }, []);
 
   // 메뉴 열기/닫기
   const toggleMenu = () => {
@@ -120,3 +131,4 @@ const Header = () => {
 };
 
 export default Header;
+

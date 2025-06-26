@@ -1,3 +1,4 @@
+// 6/26 원본
 import React, { useEffect, useRef, useState } from "react";
 import { portText } from "../constants";
 import { gsap } from "gsap";
@@ -7,26 +8,29 @@ const Port = () => {
   gsap.registerPlugin(ScrollTrigger);
 
   const horizontalRef = useRef(null); // 수평 pin 대상 전체 섹션
-  const wrapRef = useRef(null);    // 수평 이동할 전체 wrapper(가로 슬라이드 요소)
+  const sectionRef = useRef(null);    // 수평 이동할 전체 wrapper(가로 슬라이드 요소)
   const titleRef = useRef(null);      // 제목 기준 요소
 
-  const [dimensions, setDimensions] = useState({
-    workW: 0,
-    innerW: 0,
-    winW: 0,
-  });
+  const [dimensions, setDimensions] = useState({ 
+    workW: 0, 
+    innerW: 0 });
 
   // (1) 전체 width 계산 후 상태 저장
   useEffect(() => {
 
     // 너비 계산 시 추가
     const updateSizes = () => {
-      if (!wrapRef.current || !titleRef.current) return;
+      if (!sectionRef.current || !titleRef.current) return;
 
-      const workW = wrapRef.current.offsetWidth;    // 슬라이드 전체 너비
+      const workW = sectionRef.current.offsetWidth;    // 슬라이드 전체 너비
       const innerW = titleRef.current.offsetWidth;     // 타이틀 너비
-      const winW = window.innerWidth;
-      setDimensions({ workW, innerW, winW });
+      // left 값까지 포함한 총 이동 거리 계산
+      // const leftOffset = parseFloat(getComputedStyle(titleRef.current).width); // '100rem' → px
+
+      console.log(workW, "workW", innerW, "innerW")
+      setDimensions({ workW, innerW });
+      // setDimensions({ workW, innerW, leftOffset});
+
       ScrollTrigger.refresh();
     };
 
@@ -37,18 +41,22 @@ const Port = () => {
 
   // (2) ScrollTrigger를 활용한 수평 스크롤 트윈 설정
   useEffect(() => {
-    if (!horizontalRef.current || !wrapRef.current) return;
+    if (!horizontalRef.current || !sectionRef.current) return;
 
-    const { workW, innerW, winW } = dimensions;
+    // const { workW, leftOffset } = dimensions;
+    const { workW, innerW } = dimensions;
+    const windowW = window.innerWidth;
     const section = horizontalRef.current;
 
     if (!section) return;
-    const totalMove = winW - innerW + (workW - winW);
+    //const totalMove =  workW - windowW + leftOffset;  // 전체 이동 거리 계산
+    const totalMove = windowW - innerW + (workW - windowW);
+    console.log(totalMove, "totalMove")
 
     // 기존 트윈 제거 (안전)
-    gsap.killTweensOf(wrapRef.current);
+    gsap.killTweensOf(sectionRef.current);
 
-    const tween = gsap.to(wrapRef.current, {
+    const tween = gsap.to(sectionRef.current, {
       x: -totalMove, // 왼쪽으로 이동
       ease: "none",
       scrollTrigger: {
@@ -56,13 +64,10 @@ const Port = () => {
         start: "top top",
         end: () => `+=${workW}`, // 섹션 너비만큼 스크롤 거리 생성
         pin: true,
-        scrub: 1,
+        scrub: true,
+        // scrub: 0.3,
         invalidateOnRefresh: true,
         // markers: true,
-        onUpdate: (self) => {
-          const xVal = self.progress.toFixed(3) * -totalMove;
-          gsap.to(wrapRef.current, { x: xVal, duration: 0.2, ease: "none" });
-        },
       },
     });
 
@@ -80,7 +85,7 @@ const Port = () => {
           포트폴리오 <em>Portfolio</em>
         </h2>
         <div className="slide-con scroll__motion">
-          <div className="port__wrap" ref={wrapRef}>
+          <div className="port__wrap" ref={sectionRef}>
             {portText.map((port, key) => (
               <article className={`port__item p${key + 1}`} key={key}>
                 <a
