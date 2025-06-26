@@ -79,7 +79,7 @@ const Port = () => {
         <h2 className="port__title scroll__motion" ref={titleRef}>
           포트폴리오 <em>Portfolio</em>
         </h2>
-        <div className="slide-con scroll__motion">
+        <div className="slide-con">
           <div className="port__wrap" ref={wrapRef}>
             {portText.map((port, key) => (
               <article className={`port__item p${key + 1}`} key={key}>

@@ -12,10 +12,17 @@
   width: 100%;
   padding-top: 105rem;
   padding-bottom: 100rem; // 기존 250rem → 줄임
+  height: 1534rem; // 6/27
 
   @media screen and (max-width: 1024px) {
     padding-top: 90rem;
     padding-bottom: 60rem;
+    height: 860rem; // 6/27
+  }
+
+  @media screen and (max-width: 600px) {
+    // height: 950rem; // 6/27 
+    height: calc(var(--vh, 1vh) * 100); // 6/27 
   }
 
   .port__title {

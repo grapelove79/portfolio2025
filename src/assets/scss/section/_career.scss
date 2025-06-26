@@ -239,15 +239,16 @@
     transform: translate(-50%, -50%);
 
     @media (max-width: 1024px) {
-       width: calc(100% - 40rem);
-      height: calc(var(--vh, 1vh) * 100 - 300rem);
+      width: calc(100% - 40rem);
+      height: 500rem;
       transform: translate(-50%, -45%);
     }
 
     @media (max-width: 600px) {
       width: calc(100% - 20rem);
-      height: calc(var(--vh, 1vh) * 100 - 350rem);
-      transform: translate(-50%, -47%);
+      // height: calc(var(--vh, 1vh) * 100 - 350rem);
+      height: calc(var(--vh, 1vh) * 100 - 50%);
+      transform: translate(-50%, -45%);
     }
   }
 
@@ -358,6 +359,9 @@
       @media screen and (max-width: 1024px) {
         font-size: 24rem;
       }
+      @media screen and (max-width: 600px) {
+        font-size: 20rem;
+      }
     }
 
     .info {
@@ -370,7 +374,7 @@
       padding: 30rem 40rem;
 
       @media (max-width: 1024px) {
-        padding: 10rem 20rem;
+        padding: 18rem 20rem;
         border-radius: 10rem;
       }
 
