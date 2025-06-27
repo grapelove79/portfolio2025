@@ -77,11 +77,11 @@ body {
   -webkit-overflow-scrolling: touch;
   overflow-x: hidden;
   overscroll-behavior: none;
-  touch-action: manipulation;
+  touch-action: none;
 }
 
 #wrap {
-   position: relative;
+  position: relative;
   width: 100%;
-  overflow: hidden;  
+  overflow: hidden;
 }
