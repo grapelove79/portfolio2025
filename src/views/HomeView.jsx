@@ -17,19 +17,23 @@ gsap.registerPlugin(ScrollTrigger)
 const HomeView = () => {
 
   useEffect(() => {
-    const isIos = () => {
-      return /iP(ad|hone|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+  const isIos = () => {
+    return /iP(ad|hone|od)/.test(navigator.userAgent) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  };
 
-    };
+  // iOS가 아닌 경우에만 normalizeScroll 적용
+  if (!isIos()) {
+    ScrollTrigger.normalizeScroll(true);
+  } else {
+    ScrollTrigger.normalizeScroll(false); // iOS에서 명확하게 제거
+  }
 
-    if (!isIos()) {
-      ScrollTrigger.normalizeScroll(true); // iOS 아닌 경우에만 활성화
-    }
+  return () => {
+    ScrollTrigger.normalizeScroll(false); // cleanup on unmount
+  };
+}, []);
 
-    return () => {
-      ScrollTrigger.normalizeScroll(false); //cleanup
-    }
-  }, []);
 
   return (
     <>

@@ -94,8 +94,6 @@
       position: relative;
       width: 100%;
       border-radius: 24rem;
-      transform: translateY(70rem); // 초기 transform과 gsap set가 동일해야 함
-      opacity: 0;
       background-color: var(--white);
       aspect-ratio: 1 / 1;
       text-align: center;

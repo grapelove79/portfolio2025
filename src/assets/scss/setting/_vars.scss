@@ -76,12 +76,11 @@ body {
   -ms-text-size-adjust: 100%;
   -webkit-overflow-scrolling: touch;
   overflow-x: hidden;
-  overscroll-behavior: none;
-  touch-action: none;
+  // overscroll-behavior: none;
+  // touch-action: none;
 }
 
 #wrap {
   position: relative;
   width: 100%;
-  overflow: hidden;
 }

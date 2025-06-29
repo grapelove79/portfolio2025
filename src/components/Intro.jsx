@@ -29,8 +29,10 @@ const Intro = () => {
         },
       });
       // 새 요소 위치 반영
-      ScrollTrigger.refresh();
     });
+
+    ScrollTrigger.refresh();
+    
     // ScrollTrigger 정리
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());

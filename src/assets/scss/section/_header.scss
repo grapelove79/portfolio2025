@@ -7,14 +7,20 @@
   height: 100rem;
   padding: 0 100rem;
   background-color: var(--white);
-  border-bottom: 1px solid #DDE1E6;
-  transition: top 0.3s;
+  transition: top 0.3s ease;
+  border-bottom: 1px solid var(--black500);
+  background: #fff;
   z-index: 99999;
 
   @media screen and (max-width: 1024px) {
     height: 70rem;
     padding: 0 20rem;
   }
+}
+
+#header.show {
+  border-bottom: 1px solid var(--black500);
+  background: #fff;
 }
 
 #header.hide {
