@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { skill } from "../constants";
@@ -12,12 +12,13 @@ import { skill } from "../constants";
 gsap.registerPlugin(ScrollTrigger);
 
 const Skill = () => {
-
   const skillRef = useRef(null);
   const listRefs = useRef([]);
 
   // IntersectionObserver로 개별 항목 모션 처리
-  useLayoutEffect(() => {
+  useEffect(() => {
+    if (!listRefs.current.length) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -31,36 +32,36 @@ const Skill = () => {
               ease: "power2.out",
               delay: index * 0.1,
             });
-            observer.unobserve(entry.target); // 한 번만 실행
-
+            observer.unobserve(entry.target); 
+          } else {
+            gsap.to(entry.target, {
+              y: "70rem",
+              opacity: 0,
+              duration: 0.6,
+              ease: "power2.out",
+              delay: index * 0.1,
+            });
+            observer.unobserve(entry.target); 
           }
-          // else {
-          //   gsap.to(entry.target, {
-          //     y: "70rem",
-          //     opacity: 0,
-          //     duration: 0.6,
-          //     ease: "power2.out",
-          //     delay: index * 0.1,
-          //   });
-          // }
         });
       },
       {
-        threshold: 0.3,
+        threshold: 0.1, // 적절한 진입 비율
         rootMargin: "0px 0px -10% 0px", // 진입 시점 미세 조절
       }
     );
 
     listRefs.current.forEach((el) => el && observer.observe(el));
 
-    return () => observer.disconnect();
+    return () => observer.disconnect();  // 메모리 누수 방지
   }, []);
 
-
+  // 데스크탑 pin 고정
   useEffect(() => {
     const matchMedia = ScrollTrigger.matchMedia({
       // 데스크탑 이상에서만 ScrollTrigger 적용
-      "(min-width: 1025px)": function () {
+      "(min-width: 1025px)": () => {
+        // "(min-width: 1025px)": function () {
         ScrollTrigger.create({
           trigger: skillRef.current,
           start: "top top",
@@ -69,6 +70,7 @@ const Skill = () => {
           pinSpacing: true,
           // markers: true,
         });
+
         // 데스크탑 pin 설정 후 refresh
         requestAnimationFrame(() => {
           ScrollTrigger.refresh();
@@ -76,7 +78,7 @@ const Skill = () => {
       },
 
       // 모바일/태블릿에서는 ScrollTrigger 제거 (필요 시 cleanup도 가능)
-      "(max-width: 1024px)": function () {
+      "(max-width: 1024px)": () => {
         // `.sticky__wrap`에 pin 제거를 위해 초기화 조치
         gsap.set(".sticky__wrap", { clearProps: "all" });
 
@@ -90,7 +92,7 @@ const Skill = () => {
     // 컴포넌트 언마운트 시 ScrollTrigger 전부 제거
     return () => {
       matchMedia.revert(); // matchMedia context 제거
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill()); // 안전하게 제거
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());  // 안전하게 제거
     };
   }, []);
 
@@ -111,6 +113,11 @@ const Skill = () => {
                 ref={(el) => {
                   if (el) listRefs.current[index] = el;
                 }}
+                style={
+                  {
+                    transform: "translateY(70rem)",  // 초기값 깜빡임 방지(gsap set가 동일해야 함)
+                    opacity: 0
+                  }}
               >
                 <strong className="skill__info">{item.info}</strong>
                 <figure className="skill__icon">

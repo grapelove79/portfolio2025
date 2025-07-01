@@ -99,6 +99,8 @@
       text-align: center;
       grid-column-end: 2 span;
       padding-top: 30rem;
+      transform: translateY(70rem); // 초기값 깜빡임 방지(gsap set가 동일해야 함)
+      opacity: 0;
       will-change: transform, opacity;
 
       @media screen and (max-width: 1024px) {
