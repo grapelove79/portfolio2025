@@ -4,7 +4,7 @@
 
 
   .pin-spacer {
-     height: 860rem;
+    height: 860rem;
     z-index: auto !important; //pin-spacer가 레이어 위에 뜨지 않도록
   }
 
@@ -22,7 +22,8 @@
       //height: 100%; // pin 될 때 뷰포트 높이 고정
       // padding-top: 105rem;
       // padding-bottom: 100rem; // 기존 250rem → 줄임
-        height: calc(var(--vh, 1vh) * 100);; // 6/27  pin 될 때 뷰포트 높이 고정
+      height: calc(var(--vh, 1vh) * 100);
+      ; // 6/27  pin 될 때 뷰포트 높이 고정
       // display: flex;
       // flex-direction: column;
       // justify-content: flex-start;

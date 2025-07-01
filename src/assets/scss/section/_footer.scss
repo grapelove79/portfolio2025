@@ -1,4 +1,4 @@
-.footer__inner {
+#footer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +12,18 @@
     height: auto;
   }
 
+  .footer__inner {
+    width: calc(100% - 200rem);
+    margin: 0 auto;
+    text-align: center;
+
+    @media screen and (max-width: 1024px) {
+      width: calc(100% - 40rem);
+    }
+  }
+  
   .footer__info {
+    width: 100%;
     font-size: 20rem;
     text-transform: uppercase;
     font-family: var(--mainEng-fonta);

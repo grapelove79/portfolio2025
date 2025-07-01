@@ -7,10 +7,7 @@ import useScrollMotion from "../hooks/useScrollMotion";
 gsap.registerPlugin(ScrollTrigger);
 
 const Port = () => {
-  const scopeRef = useRef(null);
-
-  // 선택자 변경 가능: ".my-motion"
-  useScrollMotion(scopeRef);
+  useScrollMotion();
 
   const horizontalRef = useRef(null);
   const wrapRef = useRef(null);
@@ -100,7 +97,7 @@ const Port = () => {
   }, [dimensions]);
 
   return (
-    <section id="port" className="port" ref={scopeRef}>
+    <section id="port" className="port">
       <div className="port__inner" ref={horizontalRef}>
         <div className="port__wrap">
           <h2 className="port__title scroll__motion" ref={titleRef}>

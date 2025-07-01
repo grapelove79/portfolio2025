@@ -19,7 +19,8 @@ const Header = ({ threshold = 5 }) => {
   const { isHeaderHidden, setHeaderHidden, isScrollDisabled } = useAppStore();
   const isMobile = useIsMobile();
   //const prevScrollYRef = useRef(0); // 이전 스크롤 위치 저장할 ref (렌더링과 무관)
-  const lastScroll = useRef(window.scrollY); // 이전 스크롤 위치 저장 (렌더링과 무관)
+  //const lastScroll = useRef(window.scrollY); // 이전 스크롤 위치 저장 (렌더링과 무관)
+   const lastScrollYRef = useRef(0); // 이전 스크롤 위치 저장용 ref
 
   // 메뉴 토글
   const toggleMenu = () => {
@@ -66,7 +67,7 @@ const Header = ({ threshold = 5 }) => {
       ticking = true;
       window.requestAnimationFrame(() => {
         const currentScroll = window.scrollY;
-        const diff = currentScroll - lastScroll.current; // 이전과 현재 차이 계산
+        const diff = currentScroll - lastScrollYRef.current; // 이전과 현재 차이 계산
 
         // 스크롤 변화량이 threshold보다 작으면 방향 판단하지 않음 (작은 흔들림 무시)
         if (Math.abs(diff) < threshold) return;
@@ -89,6 +90,7 @@ const Header = ({ threshold = 5 }) => {
         //   }
         //   return prev; // 이전 방향과 같으면 상태 변경 없이 그대로 유지
         // });
+
         // 방법 2: 방향이 이전 상태와 다를 때만 상태 업데이트
         if (scrollDirection !== direction) {
           setScrollDirection(direction); // 스크롤 방향 상태 업데이트
@@ -96,7 +98,7 @@ const Header = ({ threshold = 5 }) => {
         }
 
         // 현재 위치를 이전 스크롤 위치로 저장
-        lastScroll.current = currentScroll;
+        lastScrollYRef.current = currentScroll;
         // prevScrollYRef.current = currentScroll;
       })
 
@@ -137,8 +139,7 @@ const Header = ({ threshold = 5 }) => {
               <li key={key}>
                 <a
                   href={nav.url}
-                  // onClick={handleNavClick}
-                  onClick={(e) => handleNavClick(e, nav.url)}
+                  onClick={handleNavClick}
                 >
                   {nav.title}
                 </a>

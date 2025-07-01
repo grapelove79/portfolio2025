@@ -28,7 +28,7 @@ const useScrollMotion = () => {
 
     return () => {
       // 해당 훅에서 생성한 트리거만 제거
-      triggers.forEach(t => t.kill());
+      triggers.forEach(trigger => trigger.kill());
     };
   }, []);
 };

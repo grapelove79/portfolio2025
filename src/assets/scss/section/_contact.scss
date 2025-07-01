@@ -1,14 +1,18 @@
 .contact {
   padding-top: 105rem;
   padding-bottom: 105rem;
+}
 
-  .contact__motion {
-    &.active {
+.contact__motion {
+  &.active {
+    .contact__title {
       transform: translateY(0);
       opacity: 1;
     }
 
-    &:has(.active).contact__wrap {
+    .contact__wrap {
+      transform: translateY(0);
+      opacity: 1;
       transition-delay: 0.3s;
     }
   }
