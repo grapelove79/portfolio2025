@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 
 // props로 onFinish를 받아옴 → 카운트다운이 끝났을 때 실행할 함수
 const LoadingScreen = ({ onFinish }) => {
-  // 5초부터 시작하는 타이머 상태
+  // 3초부터 시작하는 타이머 상태
   const [count, setCount] = useState(3);
   const [fadeOut, setFadeOut] = useState(false)
 
   useEffect(() => {
     document.body.classList.add("stop-scroll--loading");
-
     if (count > 0) {
       const timer = setTimeout(() => setCount(count - 1), 1000);
       return () => clearTimeout(timer);
@@ -22,7 +21,7 @@ const LoadingScreen = ({ onFinish }) => {
         // 로딩 완료 콜백: 이 타이밍에 App → HomeView → IntroSection 순으로 mount
 
       }, 500); // fade-out 후 500ms 기다림
-      return () => clearTimeout(timeout);  // cleanup
+      return () => clearTimeout(timeout);
     }
   }, [count, onFinish]);
 

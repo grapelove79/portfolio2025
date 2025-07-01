@@ -4,7 +4,6 @@
   transition-property: transform, opacity;
   transition-duration: 0.7s, 0.7s;
   transition-timing-function: cubic-bezier(0.41, 0.01, 0.16, 1.01);
-  will-change: transform, opacity;
 
   &.active {
     transform: translateY(0);

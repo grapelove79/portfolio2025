@@ -1,5 +1,4 @@
 import React, { useEffect, useCallback, useRef, useState } from "react";
-import useIsMobile from "../hooks/useIsMobile";
 
 let x = 0;
 let y = 0;
@@ -11,7 +10,21 @@ const Cursor = () => {
   const cursorRef = useRef(null);
   const requestRef = useRef(0);
   const [hoverType, setHoverType] = useState("default"); // 'default', 'scale', 'invert'
-  const isMobile = useIsMobile();
+  const [isMobile, setIsMobile] = useState(false);
+
+    // 뷰포트 크기에 따라 모바일 여부 체크
+    const checkMobile = useCallback(() => {
+      setIsMobile(window.innerWidth < 768);
+    }, []);
+  
+    useEffect(() => {
+      checkMobile(); // 첫 렌더링 시 체크
+      window.addEventListener("resize", checkMobile); // 리사이즈 시 체크
+  
+      return () => {
+        window.removeEventListener("resize", checkMobile);
+      };
+    }, [checkMobile]);
 
   // 마우스가 움직일 때 좌표 저장
   const handleMouseMove = (e) => {
@@ -82,7 +95,7 @@ const Cursor = () => {
         width: "40px",
         height: "40px",
         pointerEvents: "none", // 실제 클릭 막지 않도록 설정
-        zIndex: 999999,
+        zIndex: 20001,
         transform: "translate(-50%, -50%)",
         transition: "transform 0.2s ease",
         mixBlendMode: "difference",
@@ -113,3 +126,8 @@ const Cursor = () => {
 };
 
 export default Cursor;
+
+
+
+
+

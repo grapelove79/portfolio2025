@@ -3,17 +3,17 @@ import { careerText } from "../constants";
 import useScrollMotion from "../hooks/useScrollMotion";
 
 const Career = () => {
-  useScrollMotion();
+  useScrollMotion(); // 커스텀 훅 호출
 
   return (
     <section id="career">
       <div className="career__inner">
         <h2 className="career__title scroll__motion">경력 <em>Career</em></h2>
-        <div className="career__wrap scroll__motion">
+        <div className="career__wrap">
           {careerText.map((career, key) => (
-            <article className={`career__item s${key + 1}`} key={key}>
+            <article className={`career__item s${key + 1}`} key={key}>    
               <div className="title__wrap">
-                <div className="title__inner">
+               <div className="title__inner">
                   <p className="date">
                     {career.date}
                   </p>

@@ -10,15 +10,14 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Intro = () => {
   useEffect(() => {
-    const elements = document.querySelectorAll(".intro__motion");
+    const elements = document.querySelectorAll("[data-motionactive]");
 
     elements.forEach((item, idx) => {
       ScrollTrigger.create({
-        // id: "intro" + idx,
+        id: "intro" + idx,
         trigger: item,
+        scrub: 0.5,
         start: "top 90%",
-        scrub: false,
-        once: false,
         invalidateOnRefresh: true,
         // markers: true,
         onEnter: () => {
@@ -28,41 +27,44 @@ const Intro = () => {
           item.classList.remove("active");
         },
       });
-      // 새 요소 위치 반영
-    });
-
-    ScrollTrigger.refresh();
-    
-    // ScrollTrigger 정리
+    })
+    // 💡 ScrollTrigger 정리
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
 
   return (
-    <section id="intro" className="intro">
+
+    <section id="intro">
       <div className="intro__inner">
-        <div className="title__box intro__motion">
+        <div className="title__box" data-motionactive>
           <h2 className="intro__title">
             <strong>{introText.title[0]}</strong>
             <strong>{introText.title[1]}</strong>
           </h2>
         </div>
         <div className="intro__text">
-          <div className="img intro__motion">
+          <div className="img" data-motionactive>
             <img src={profile} alt="어바웃" />
           </div>
-          <h3 className="title intro__motion">
+          <h3 className="title" data-motionactive>
             {introText.subtitle}
           </h3>
           <div className="text">
-            <div className="intro__motion">
+            <div data-motionactive>
+              {/* {introText.desc[0].split("\n").map((line, index) => (
+                <p key={index}>{line}</p>
+              ))} */}
               <ResponsiveText
                 text={introText.desc[0]}
                 as="p"
               />
             </div>
-            <div className="intro__motion">
+            <div data-motionactive>
+              {/* {introText.desc[1].split("\n").map((line, index) => (
+                <p key={index}>{line}</p>
+              ))} */}
               <ResponsiveText
                 text={introText.desc[1]}
                 as="p"

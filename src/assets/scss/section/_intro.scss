@@ -1,10 +1,10 @@
-.intro {
+#intro {
   padding-top: 105rem;
   padding-bottom: 105rem;
 }
 
 .intro__inner {
-  // width: calc(100% - 200rem);
+  width: calc(100% - 200rem);
   margin: 0 auto;
   height: 100%;
   display: flex;
@@ -14,17 +14,16 @@
 
   @media screen and (max-width: 1024px) {
     justify-content: center;
-    // width: calc(100% - 40rem);
+    width: calc(100% - 40rem);
   }
 
   .title__box {
-    width: 100%;
-    // width: calc(100% - 200rem);
-    // margin: 0 auto;
+    width: calc(100% - 200rem);
+    margin: 0 auto;
 
-    // @media screen and (max-width: 1024px) {
-    //   width: calc(100% - 40rem);
-    // }
+    @media screen and (max-width: 1024px) {
+      width: calc(100% - 40rem);
+    }
 
     .intro__title {
       position: relative;
@@ -37,7 +36,6 @@
       white-space: nowrap;
       text-align: center;
       line-height: 1;
-      overflow: hidden;
 
       @media screen and (max-width: 1024px) {
         font-size: 36rem;
@@ -51,25 +49,24 @@
       transition-duration: 1.2s;
       transition-timing-function: cubic-bezier(0.41, 0.01, 0.16, 1.01);
       background-color: var(--white);
-      will-change: transform;
 
       &:first-of-type {
-        transform: translateX(calc(max(66px, 6.6vw) * -1));
+        transform: translateX(calc(max(6.6rem, 6.6vw) * -1));
         opacity: 0.3;
 
         @media (max-width: 600px) {
           // left: 50%;
-          transform: translateX(-30%);
+          transform: translateX(-50%);
         }
       }
 
       &:last-of-type {
-        margin-top: max(2rem, 2vw);
-        transform: translateX(max(132px, 13vw));
+        margin-top: max(1.3rem, 1.3vw);
+        transform: translateX(max(13.2rem, 13vw));
 
         @media (max-width: 600px) {
           // left: 50%;
-          transform: translateX(30%);
+          transform: translateX(100rem);
         }
       }
     }
@@ -94,21 +91,14 @@
     justify-content: center;
     flex-direction: column;
     position: relative;
-    width: calc(100% - 200rem);
-    margin: 0 auto;
 
-    @media screen and (max-width: 1024px) {
-      width: calc(100% - 40rem);
-    }
-
-    .intro__motion {
+    [data-motionactive] {
       transform: translateY(70rem);
       opacity: 0;
       transition-property: transform, opacity;
       transition-duration: 1.2s;
       transition-timing-function: cubic-bezier(0.41, 0.01, 0.16, 1.01);
       background-color: var(--white);
-      will-change: transform, opacity;
 
       &.active {
         transform: translateY(0);

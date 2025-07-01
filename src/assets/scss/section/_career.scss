@@ -9,9 +9,7 @@
     position: sticky;
     top: 70rem;
     left: 0;
-    height: max(44rem, 4.4vw);
-    font-size: 44rem;
-    line-height: 1.9;
+    height: 4vw;
     width: calc(100% - 200rem); // 25.5.30
     margin: 0px auto; // 25.5.30
     font-size: 44rem;
@@ -22,8 +20,10 @@
     margin-bottom: 52rem;
 
     @media screen and (max-width: 1024px) {
+      height: auto;
       font-size: 24rem;
       width: calc(100% - 40rem);
+       margin-bottom: 32rem;
     }
 
     em {
@@ -38,7 +38,6 @@
   }
 
   .career__wrap {
-    position: relative;
     margin: 0px auto;
     width: calc(100% - 200rem);
 
@@ -49,18 +48,17 @@
     .career__item {
       height: 640rem;
       padding: 54rem;
+
       @include flex-between;
       flex-direction: column;
       position: sticky;
       left: 0;
       border-radius: 42rem;
-      margin-bottom: 34rem;
 
       @media screen and (max-width: 1024px) {
         height: 340rem;
         padding: 20rem;
         border-radius: 20rem;
-        margin-bottom: 20rem;
       }
 
       &.s1 {
@@ -114,17 +112,8 @@
       }
 
       .title__wrap {
-        position: relative;
-        height: calc(var(--vh, 1vh ) *100);
-        
-         .title__inner {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: max-content;
-          height: fit-content;
-          transform: translate(-50%, -50%);
-        }
+        height: 100%;
+        align-content: center;
       }
 
       .date {

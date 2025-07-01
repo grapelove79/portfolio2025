@@ -13,7 +13,8 @@ const App = () => {
   // loadingDone이 App에서 직접 관리되므로 smooth()와 link()도 정확
   useEffect(() => {
     if (loadingDone) {
-      link({ lenis }); // 인자로 넘김ink();
+      link(); // 인자로 넘김ink();
+      lenis(); // 인자로 넘김ink();
     }
   }, [loadingDone]);
 

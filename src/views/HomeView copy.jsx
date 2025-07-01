@@ -1,31 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
+import Cursor from "../components/Cursor";
 import Header from "../components/Header";
 import Skip from "../components/Skip";
-import IntroSection from "../components/IntroSection";
 import Intro from "../components/Intro";
 import Skill from "../components/Skill";
-import Career from '../components/Career';
+import Site from "../components/Site";
 import Port from "../components/Port";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 import Main from "../components/Main";
 
 const HomeView = () => {
+  const [hover, hoverChange] = useState(false);
+
   return (
     <>
+      <Cursor hover={hover} />
       <Skip />
-      <Header />
-      <Main>
-        <IntroSection /> {/* 영상 시퀀스 */}
-        <Intro />        {/* 기존 인트로 */}
+      <Header hoverChange={hoverChange}/>
+      <Main hoverChange={hoverChange}>
+        <Intro />
         <Skill />
-        <Career />
+        <Site />
         <Port />
         <Contact />
       </Main>
-      <Footer />
+      <Footer hoverChange={hoverChange}/>
     </>
-  );
-};
+  )
+}
 
 export default HomeView;

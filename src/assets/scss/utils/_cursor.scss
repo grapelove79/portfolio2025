@@ -1,13 +1,15 @@
-.cursor {
-  svg {
-    transition: transform 0.2s ease;
-  }
+@media (min-width: 1024px) and (pointer: fine) {
+  .cursor {
+    svg {
+      transition: transform 0.2s ease;
+    }
 
-  &.scale svg {
-    transform: scale(2);
-  }
+    &.scale svg {
+      transform: scale(2);
+    }
 
-  &.invert svg {
-    transform: scale(1);
+    &.invert svg {
+      transform: scale(1);
+    }
   }
 }
