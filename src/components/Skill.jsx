@@ -68,12 +68,22 @@ const Skill = () => {
           pinSpacing: true,
           // markers: true,
         });
+
+        // 데스크탑 pin 설정 후 refresh
+        requestAnimationFrame(() => {
+          ScrollTrigger.refresh();
+        });
       },
 
       // 모바일/태블릿에서는 ScrollTrigger 제거 (필요 시 cleanup도 가능)
       "(max-width: 1024px)": () => {
         // `.sticky__wrap`에 pin 제거를 위해 초기화 조치
         gsap.set(".sticky__wrap", { clearProps: "all" });
+
+        // 모바일 해제 후에도 refresh
+        requestAnimationFrame(() => {
+          ScrollTrigger.refresh();
+        });
       },
     });
 

@@ -1,22 +1,27 @@
-import React from "react";
+import React, { useRef } from "react";
 import { careerText } from "../constants";
 import useScrollMotion from "../hooks/useScrollMotion";
 
 const Career = () => {
-  useScrollMotion(); // 커스텀 훅 호출
+    const scopeRef = useRef(null);
+
+  // 선택자 변경 가능: ".my-motion"
+  useScrollMotion(scopeRef);
 
   return (
-    <section id="career">
+    <section id="career" ref={scopeRef}>
       <div className="career__inner">
         <h2 className="career__title scroll__motion">경력 <em>Career</em></h2>
         <div className="career__wrap scroll__motion">
           {careerText.map((career, key) => (
-            <article className={`career__item s${key + 1}`} key={key}>    
+            <article className={`career__item s${key + 1}`} key={key}>
               <div className="title__wrap">
-                <p className="date">
-                  {career.date}
-                </p>
-                <h3 className="title">{career.title}</h3>
+                <div className="title__inner">
+                  <p className="date">
+                    {career.date}
+                  </p>
+                  <h3 className="title">{career.title}</h3>
+                </div>
               </div>
               <div className="info">
                 <dl><dt>부서명</dt><dd>{career.info[0]}</dd></dl>

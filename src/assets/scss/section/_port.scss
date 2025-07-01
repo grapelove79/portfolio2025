@@ -1,270 +1,286 @@
 .port {
   position: relative;
   background-color: #f2f4f8;
-}
 
-.pin-spacer {
-  z-index: auto !important; // 필요시 z-index 조정
-}
 
-.port__inner {
-  position: relative;
-  width: 100%;
-  padding-top: 105rem;
-  padding-bottom: 100rem; // 기존 250rem → 줄임
-  height: 1534rem; // 6/27
-
-  @media screen and (max-width: 1024px) {
-    padding-top: 90rem;
-    padding-bottom: 60rem;
-    height: 860rem; // 6/27
+  .pin-spacer {
+     height: 860rem;
+    z-index: auto !important; //pin-spacer가 레이어 위에 뜨지 않도록
   }
 
-  @media screen and (max-width: 600px) {
-    // height: 950rem; // 6/27 
-    height: calc(var(--vh, 1vh) * 100); // 6/27 
-  }
+  .port__inner {
+    position: relative;
+    padding-top: 105px;
 
-  .port__title {
-    width: calc(100% - 200rem);
-    height: max(44rem, 4.4vw);
-    font-size: 44rem;
-    line-height: 1.9;
-    margin: 0px auto;
-    font-size: 44rem;
-    font-weight: 900;
-    font-family: var(--mainKor-font);
-    text-transform: uppercase;
-    color: var(--black100);
-    margin-bottom: 52rem;
+    // @media screen and (max-width: 1024px) {
+    //   padding-top: 90px;
+    // }
 
-    @media screen and (max-width: 1024px) {
-      font-size: 24rem;
-      width: calc(100% - 40rem);
-    }
+    .port__wrap {
+      position: relative;
+      width: 100%;
+      //height: 100%; // pin 될 때 뷰포트 높이 고정
+      // padding-top: 105rem;
+      // padding-bottom: 100rem; // 기존 250rem → 줄임
+        height: calc(var(--vh, 1vh) * 100);; // 6/27  pin 될 때 뷰포트 높이 고정
+      // display: flex;
+      // flex-direction: column;
+      // justify-content: flex-start;
 
-    em {
-      font-size: 20rem;
-      font-weight: 700;
-      line-height: 2;
 
       @media screen and (max-width: 1024px) {
-        font-size: 14rem;
+        // padding-top: 90rem;
+        // padding-bottom: 60rem;
+        // height: 860rem; // 6/27
+      }
+
+      @media screen and (max-width: 600px) {
+        // height: 950rem; // 6/27 
+        // height: calc(var(--vh, 1vh) * 100); // 6/27 
       }
     }
-  }
 
-  .slide-con {
-    position: relative;
-    margin-top: 35rem;
-    padding-left: 100rem;
-    width: 100%;
-    height: 660rem;
-    overflow: hidden;
-
-    @media screen and (max-width: 1024px) {
-      position: relative;
-      margin-top: 32rem;
-      padding-left: 20rem;
-      width: 100%;
-      height: 339rem;
-    }
-  }
-
-  .port__wrap {
-    position: absolute;
-    top: 0px;
-    left: 100rem;
-    width: max-content;
-    z-index: 1;
-    display: flex;
-
-    @media screen and (max-width: 1024px) {
-      left: 20rem;
-    }
-
-    .port__item {
-      position: relative;
-      width: 620rem;
-      height: 660rem;
-      background-color: var(--white);
-      border-radius: 16rem;
-      box-shadow: 0 2rem 10rem 0 rgba(0, 0, 0, 0.1);
-      flex-shrink: 0;
-      overflow: hidden;
+    .port__title {
+      width: calc(100% - 200rem);
+      height: max(44rem, 4.4vw);
+      font-size: 44rem;
+      line-height: 1.9;
+      margin: 0px auto;
+      font-size: 44rem;
+      font-weight: 900;
+      font-family: var(--mainKor-font);
+      text-transform: uppercase;
+      color: var(--black100);
 
       @media screen and (max-width: 1024px) {
-        width: 312rem;
+        font-size: 24rem;
+        width: calc(100% - 40rem);
+      }
+
+      em {
+        font-size: 20rem;
+        font-weight: 700;
+        line-height: 2;
+
+        @media screen and (max-width: 1024px) {
+          font-size: 14rem;
+        }
+      }
+    }
+
+    .slide-con {
+      position: relative;
+      padding-left: 100rem;
+      width: 100%;
+      height: 660rem;
+      overflow: hidden;
+      margin-top: 52rem;
+
+
+      @media screen and (max-width: 1024px) {
+        position: relative;
+        padding-left: 20rem;
+        width: 100%;
         height: 339rem;
       }
 
-      &+.port__item {
-        margin-left: 20rem;
-      }
-
-      @media (min-width: 1024px) and (pointer: fine) {
-        &:hover {
-          box-shadow: 0 16rem 16rem 0 rgba(0, 0, 0, 0.1);
-
-          .arrow:before {
-            animation: outlinkAnimationBefore 0.3s forwards 0.3s;
-          }
-
-          @keyframes outlinkAnimationBefore {
-            from {
-              margin-top: 26rem;
-              margin-right: 26rem;
-              opacity: 0;
-            }
-
-            to {
-              margin-top: 0;
-              margin-right: 0;
-              opacity: 1;
-            }
-          }
-
-          .arrow:after {
-            animation: outlinkAnimationAfter 0.3s forwards;
-          }
-
-          @keyframes outlinkAnimationAfter {
-            from {
-              opacity: 1;
-              margin-top: 0;
-              margin-right: 0;
-            }
-
-            to {
-              opacity: 0;
-              margin-top: 26rem * -1;
-              margin-right: 26rem * -1;
-            }
-          }
-        }
-      }
-    }
-
-    .num {
-      font-size: 32rem;
-      font-family: var(--mainNum-font);
-    }
-
-    .port__item-link {
-      display: inline-block;
-      width: 100%;
-      height: 100%;
-
-      .port__img {
-        position: relative;
-        width: 100%;
-        height: 350rem;
-        overflow: hidden;
-        box-shadow: 0 0 5rem 0 rgba(0, 0, 0, 0.1);
+      .port__list {
+        display: flex;
+        width: max-content; // 가로 슬라이드 길이 자동 계산
+        height: 100%;
 
         @media screen and (max-width: 1024px) {
-          height: 175rem;
+          left: 20rem;
         }
-      }
 
-      img {
-        // border-radius: 5px;
-        width: 100%;
-        height: 100%;
-        object-fit: fill;
-      }
-    }
+        .port__item {
+          position: relative;
+          flex-shrink: 0; // 가로 길이 고정
+          width: 620rem;
+          height: 660rem;
+          background: var(--white);
+          border-radius: 16rem;
+          // box-shadow: 0 2rem 10rem 0 rgba(0, 0, 0, 0.1);
+          overflow: hidden;
 
-    .port__desc {
-      padding: 30rem;
+          transition: box-shadow 0.3s ease; // 깔끔한 hover 효과
 
-      @media screen and (max-width: 1024px) {
-        padding: 15rem;
-      }
-    }
+          @media (max-width: 1024px) {
+            width: 312rem;
+            height: 339rem;
+          }
 
-    .company {
-      font-size: 24rem;
-      letter-spacing: -0.03rem;
-      color: #5e2bb8;
-      font-weight: 800;
+          &+.port__item {
+            margin-left: 20rem;
+          }
 
-      @media screen and (max-width: 1024px) {
-        font-size: 13rem;
-      }
-    }
+          @media (min-width: 1024px) and (pointer: fine) {
+            &:hover {
+              // box-shadow: 0 16rem 16rem 0 rgba(0, 0, 0, 0.1);
 
-    .title {
-      font-size: 30rem;
-      font-weight: 700;
-      margin-top: 6rem;
-      margin-bottom: 12rem;
-      font-weight: 800;
-      color: #121619;
-      letter-spacing: -0.1rem;
+              .arrow:before {
+                animation: outlinkAnimationBefore 0.3s forwards 0.3s;
+              }
 
-      @media screen and (max-width: 1024px) {
-        font-size: 16rem;
-        margin-top: 6rem;
-        margin-bottom: 8rem;
-      }
-    }
+              @keyframes outlinkAnimationBefore {
+                from {
+                  margin-top: 26rem;
+                  margin-right: 26rem;
+                  opacity: 0;
+                }
 
-    .desc {
-      font-size: 20rem;
-      letter-spacing: -0.03rem;
-      color: #121619;
+                to {
+                  margin-top: 0;
+                  margin-right: 0;
+                  opacity: 1;
+                }
+              }
 
-      @media screen and (max-width: 1024px) {
-        font-size: 13rem;
-      }
-    }
+              .arrow:after {
+                animation: outlinkAnimationAfter 0.3s forwards;
+              }
 
-    .arrow {
-      position: absolute;
-      bottom: 20rem;
-      display: inline-block;
-      width: max(30px, 3vw);
-      height: max(30px, 3vw);
-      margin-left: 60rem;
-      border-radius: 50%;
-      background-color: var(--black100);
-      right: 30rem;
+              @keyframes outlinkAnimationAfter {
+                from {
+                  opacity: 1;
+                  margin-top: 0;
+                  margin-right: 0;
+                }
 
-      @media screen and (max-width: 1024px) {
-        bottom: 10rem;
-        right: 15rem;
-      }
+                to {
+                  opacity: 0;
+                  margin-top: 26rem * -1;
+                  margin-right: 26rem * -1;
+                }
+              }
+            }
+          }
 
-      &::before {
-        content: '';
-        display: block;
-        position: absolute;
-        opacity: 0;
-        right: max(10px, 1vw);
-        width: max(10px, 1vw);
-        height: max(10px, 1vw);
-        margin-top: max(3.3px, 0.33vw);
-        margin-right: max(3.3px, 0.33vw);
-        background: url("../../img/button_more_white.svg") 0 0;
-        background-size: 100% 100%;
-        top: 50%;
-        transform: translateY(-50%);
-        transition: opacity 0.2s, margin 0.2s;
-      }
 
-      &::after {
-        content: '';
-        position: absolute;
-        display: block;
-        right: max(10px, 1vw);
-        width: max(10px, 1vw);
-        height: max(10px, 1vw);
-        background: url("../../img/button_more_white.svg") 0 0;
-        background-size: 100% 100%;
-        top: 50%;
-        transform: translateY(-50%);
-        transition: opacity 0.2s, margin 0.2s;
+          .num {
+            font-size: 32rem;
+            font-family: var(--mainNum-font);
+          }
+
+
+          .port__item-link {
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+
+            .port__img {
+              position: relative;
+              width: 100%;
+              height: 350rem;
+              overflow: hidden;
+              box-shadow: 0 0 5rem 0 rgba(0, 0, 0, 0.1);
+
+              @media screen and (max-width: 1024px) {
+                height: 175rem;
+              }
+            }
+
+            img {
+              // border-radius: 5px;
+              width: 100%;
+              height: 100%;
+              object-fit: fill;
+            }
+          }
+
+          .port__desc {
+            padding: 30rem;
+
+            @media screen and (max-width: 1024px) {
+              padding: 15rem;
+            }
+
+            .company {
+              font-size: 24rem;
+              letter-spacing: -0.03rem;
+              color: #5e2bb8;
+              font-weight: 800;
+
+              @media screen and (max-width: 1024px) {
+                font-size: 13rem;
+              }
+            }
+
+            .title {
+              font-size: 30rem;
+              font-weight: 700;
+              margin-top: 6rem;
+              margin-bottom: 12rem;
+              font-weight: 800;
+              color: #121619;
+              letter-spacing: -0.1rem;
+
+              @media screen and (max-width: 1024px) {
+                font-size: 16rem;
+                margin-top: 6rem;
+                margin-bottom: 8rem;
+              }
+            }
+
+            .desc {
+              font-size: 20rem;
+              letter-spacing: -0.03rem;
+              color: #121619;
+
+              @media screen and (max-width: 1024px) {
+                font-size: 13rem;
+              }
+            }
+
+            .arrow {
+              position: absolute;
+              bottom: 20rem;
+              display: inline-block;
+              width: max(30px, 3vw);
+              height: max(30px, 3vw);
+              margin-left: 60rem;
+              border-radius: 50%;
+              background-color: var(--black100);
+              right: 30rem;
+
+              @media screen and (max-width: 1024px) {
+                bottom: 10rem;
+                right: 15rem;
+              }
+
+              &::before {
+                content: '';
+                display: block;
+                position: absolute;
+                opacity: 0;
+                right: max(10px, 1vw);
+                width: max(10px, 1vw);
+                height: max(10px, 1vw);
+                margin-top: max(3.3px, 0.33vw);
+                margin-right: max(3.3px, 0.33vw);
+                background: url("../../img/button_more_white.svg") 0 0;
+                background-size: 100% 100%;
+                top: 50%;
+                transform: translateY(-50%);
+                transition: opacity 0.2s, margin 0.2s;
+              }
+
+              &::after {
+                content: '';
+                position: absolute;
+                display: block;
+                right: max(10px, 1vw);
+                width: max(10px, 1vw);
+                height: max(10px, 1vw);
+                background: url("../../img/button_more_white.svg") 0 0;
+                background-size: 100% 100%;
+                top: 50%;
+                transform: translateY(-50%);
+                transition: opacity 0.2s, margin 0.2s;
+              }
+            }
+          }
+        }
       }
     }
   }

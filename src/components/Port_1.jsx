@@ -1,12 +1,12 @@
+// 정상 작동 잘됨
+
 import React, { useEffect, useRef, useState } from "react";
 import { portText } from "../constants";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import useScrollMotion from "../hooks/useScrollMotion";
-import { debounce } from "lodash";
 
 gsap.registerPlugin(ScrollTrigger);
-
 const Port = () => {
   useScrollMotion(); // 커스텀 훅 
 
@@ -30,18 +30,19 @@ const Port = () => {
       const workW = wrapRef.current.offsetWidth;    // 슬라이드 전체 너비
       const innerW = titleRef.current.offsetWidth;     // 타이틀 너비
       const winW = window.innerWidth;
-
       setDimensions({ workW, innerW, winW });
       // ScrollTrigger.refresh();
     };
 
     updateSizes();
 
-    const handleResize = debounce(() => {
+    const handleResize = () => {
       updateSizes();
-      ScrollTrigger.refresh();
-    }, 200); // 200ms 동안 연속 호출되면 마지막 한 번만 실행
-
+      // resize나 dimensions 계산 후 refresh()는 raf로 래핑하면 Reflow 안정적
+      requestAnimationFrame(() => {
+        ScrollTrigger.refresh();
+      });
+    };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -51,12 +52,16 @@ const Port = () => {
     if (!horizontalRef.current || !wrapRef.current) return;
 
     const { workW, innerW, winW } = dimensions;
-    if (!workW) return;
 
     // const section = horizontalRef.current;
     // if (!section) return;
 
-    const totalMove = winW - innerW + (workW - winW);
+    if (workW === 0) return;
+
+    const totalMoveRaw = winW - innerW + (workW - winW);
+    const totalMove = parseFloat(totalMoveRaw.toFixed(3));
+
+    console.log("totalMove:", totalMove);
 
     // 기존 트윈 제거 (안전)
     // gsap.killTweensOf(wrapRef.current);
@@ -64,61 +69,69 @@ const Port = () => {
 
     const ctx = gsap.context(() => {
       gsap.to(wrapRef.current, {
+        //  const scrollTriggerInstance =  gsap.to(wrapRef.current, {
         x: -totalMove, // 왼쪽으로 이동
         ease: "none",
+        // duration:2.5,
         scrollTrigger: {
           trigger: horizontalRef.current,
           start: "top top",
-          end: () => `+=${workW}`, // 섹션 너비만큼 스크롤 거리 생성
+          // end:`bottom+=100% bottom`, // 섹션 너비만큼 스크롤 거리 생성
+          end: () => `bottom+=${workW} bottom`, // 섹션 너비만큼 스크롤 거리 생성
           pin: true,
           scrub: 1,
           invalidateOnRefresh: true,
-          refreshPriority: 1,
-          // markers: true,
-          onUpdate: (self) => {
-            const xVal = self.progress.toFixed(3) * -totalMove;
-            gsap.to(wrapRef.current, { x: xVal, duration: 0.2, ease: "none" });
-          },
+          markers: true,
         },
       });
+      //  }).scrollTrigger;
+
+
+      // const calculatedEnd = scrollTriggerInstance.vars.end();  
+      // console.log("Calculated end value: ", calculatedEnd);
+
+      
     }, horizontalRef);
     // return () => {
     //   tween.scrollTrigger?.kill();
     //   tween.kill();
     // };
-
-    return () => ctx.revert();
-
+    return () => {
+      ctx.revert();
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    }
   }, [dimensions]);
 
   return (
     <section id="port" className="port">
       <div className="port__inner" ref={horizontalRef}>
-        <h2 className="port__title scroll__motion" ref={titleRef}>
-          포트폴리오 <em>Portfolio</em>
-        </h2>
-        <div className="slide-con">
-          <div className="port__wrap" ref={wrapRef}>
-            {portText.map((port, key) => (
-              <article className={`port__item p${key + 1}`} key={key}>
-                <a
-                  href={port.view}
-                  target="_blank"
-                  className="port__item-link"
-                  rel="noreferrer noopener"
-                >
-                  <div className="port__img">
-                    <img src={port.img} alt={port.name} />
-                  </div>
-                  <div className="port__desc">
-                    <h3 className="company">{port.company}</h3>
-                    <h3 className="title">{port.title}</h3>
-                    <p className="desc">{port.desc}</p>
-                    <span className="arrow"></span>
-                  </div>
-                </a>
-              </article>
-            ))}
+        <div className="port__wrap">
+          <h2 className="port__title scroll__motion" ref={titleRef}>
+            포트폴리오 <em>Portfolio</em>
+          </h2>
+          <div className="slide-con">
+            <div className="port__list" ref={wrapRef}>
+              {portText.map((port, key) => (
+                <article className={`port__item p${key + 1}`} key={key}>
+                  <a
+                    href={port.view}
+                    target="_blank"
+                    className="port__item-link"
+                    rel="noreferrer noopener"
+                  >
+                    <div className="port__img">
+                      <img src={port.img} alt={port.name} />
+                    </div>
+                    <div className="port__desc">
+                      <h3 className="company">{port.company}</h3>
+                      <h3 className="title">{port.title}</h3>
+                      <p className="desc">{port.desc}</p>
+                      <span className="arrow"></span>
+                    </div>
+                  </a>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </div>

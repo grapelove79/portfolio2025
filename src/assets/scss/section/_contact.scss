@@ -2,20 +2,16 @@
   padding-top: 105rem;
   padding-bottom: 105rem;
 
+  .contact__motion {
     &.active {
-
-      .contact__title {
-        transform: translateY(0);
-        opacity: 1;
-      }
-
-      .contact__wrap {
-        transform: translateY(0);
-        opacity: 1;
-        transition-delay: 0.3s;
-      }
-  
+      transform: translateY(0);
+      opacity: 1;
     }
+
+    &:has(.active).contact__wrap {
+      transition-delay: 0.3s;
+    }
+  }
 }
 
 .contact__inner {
@@ -30,12 +26,7 @@
     justify-content: center;
   }
 
-  .contact__motion {
-
-
-
-  
-  }
+  .contact__motion {}
 
   .contact__title {
     width: calc(100% - 200rem);
@@ -49,7 +40,7 @@
     text-transform: uppercase;
     color: var(--black100);
     margin-bottom: 52rem;
-        transform: translateY(70rem);
+    transform: translateY(70rem);
     opacity: 0;
     transition-property: transform, opacity;
     transition-duration: 0.7s;
@@ -75,19 +66,20 @@
   .contact__wrap {
     width: calc(100% - 200rem);
     height: 610rem;
-    min-height: 280rem;
+    // min-height: 280rem;
     background-color: var(--black);
     color: var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    flex-wrap: wrap;
     position: relative;
     border-radius: 24rem;
     margin: 0 auto;
     padding: 20rem 30rem 30rem;
     text-align: center;
-        transform: translateY(70rem);
+    transform: translateY(70rem);
     opacity: 0;
     transition-property: transform, opacity;
     transition-duration: 0.7s;

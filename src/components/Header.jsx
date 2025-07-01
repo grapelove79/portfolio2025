@@ -81,18 +81,19 @@ const Header = ({threshold = 5}) => {
           scrollDirection이 바뀌지 않으면 setHeaderHidden도 실행되지 않음.
           특히 연속된 scroll 이벤트에서 최소한의 setState만 발생시켜 퍼포먼스에 유리합니다.
         */
-        setScrollDirection((prev) => {
-          // 현재 방향이 이전 방향과 다를 때만 상태 업데이트
-          if (prev !== direction) {
-            setHeaderHidden(direction === "down"); // 스크롤 방향이 down이면 헤더 숨김
-            return direction; // scrollDirection 상태를 업데이트
-          }
-          return prev; // 이전 방향과 같으면 상태 변경 없이 그대로 유지
-        });
-        // 방법 2
-        // if (direction !== scrollDirection) {
-        //   setScrollDirection(direction);
-        // }
+        // setScrollDirection((prev) => {
+        //   // 현재 방향이 이전 방향과 다를 때만 상태 업데이트
+        //   if (prev !== direction) {
+        //     setHeaderHidden(direction === "down"); // 스크롤 방향이 down이면 헤더 숨김
+        //     return direction; // scrollDirection 상태를 업데이트
+        //   }
+        //   return prev; // 이전 방향과 같으면 상태 변경 없이 그대로 유지
+        // });
+        // 방법 2: 방향이 이전 상태와 다를 때만 상태 업데이트
+        if (scrollDirection !== direction) {
+          setScrollDirection(direction); // 스크롤 방향 상태 업데이트
+          setHeaderHidden(direction === "down"); // 스크롤 방향이 down이면 헤더 숨김
+        }
 
         // 현재 위치를 이전 스크롤 위치로 저장
         lastScroll.current = currentScroll;
@@ -115,7 +116,33 @@ const Header = ({threshold = 5}) => {
   }, [scrollDirection]);
 
   // 모바일 메뉴 클릭 시 메뉴 닫기
-  const handleNavClick = () => setOn(false);
+  // const handleNavClick = () => setOn(false);
+  
+  const videowrapRef = useRef(null);
+
+const handleNavClick = (e, url) => {
+  setOn(false); // 메뉴 닫기
+
+  if (url === "#home") {
+    e.preventDefault();
+
+    // 스크롤 최상단 이동 (스무스)
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // videoWrap active 트리거
+    if (videowrapRef.current) {
+      videowrapRef.current.classList.remove("active");
+
+      // 강제로 다시 추가하여 트리거
+      // reflow를 강제해야 CSS transition이 인식됨
+      void videowrapRef.current.offsetWidth;
+
+      videowrapRef.current.classList.add("active");
+    }
+  }
+  // else: 기본 href 이동 그대로
+};
+
 
   // 헤더 클래스명 구성
   const headerClassName = [
@@ -134,7 +161,13 @@ const Header = ({threshold = 5}) => {
           <ul className="nav__wrap">
             {headerNav.map((nav, key) => (
               <li key={key}>
-                <a href={nav.url} onClick={handleNavClick}>{nav.title}</a>
+                <a 
+                href={nav.url} 
+                // onClick={handleNavClick}
+                onClick={(e) => handleNavClick(e, nav.url)}
+                >
+                  {nav.title}
+                  </a>
               </li>
             ))}
           </ul>
