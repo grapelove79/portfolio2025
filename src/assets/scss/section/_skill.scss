@@ -143,3 +143,35 @@
     }
   }
 }
+
+
+
+// const scrollToTopAndTrigger = () => {
+//   window.scrollTo({ top: 0, behavior: "smooth" });
+
+//   let scrollTimeout;
+
+//   const handleScroll = () => {
+//     // 스크롤 이벤트 발생할 때마다 타이머 초기화
+//     if (scrollTimeout) clearTimeout(scrollTimeout);
+
+//     // 마지막 스크롤 후 일정 시간(100ms) 지나면 멈춘 것으로 간주
+//     scrollTimeout = setTimeout(() => {
+//       window.removeEventListener("scroll", handleScroll);
+
+//       if (videowrapRef.current) {
+//         videowrapRef.current.classList.remove("active");
+//         void videowrapRef.current.offsetWidth;
+//         videowrapRef.current.classList.add("active");
+//       }
+//     }, 100);
+//   };
+
+//   window.addEventListener("scroll", handleScroll);
+// };
+
+// if (url === "#home") {
+//   e.preventDefault();
+//   setOn(false);
+//   scrollToTopAndTrigger();
+// }

@@ -23,10 +23,10 @@ import port14 from "../assets/img/donga_sci_41.png";
 import port15 from "../assets/img/donga_soc_41.png";
 
 export const headerNav = [
-  {
-    title: "홈",
-    url: "#home"
-  },
+  // {
+  //   title: "홈",
+  //   url: "#home"
+  // },
   {
     title: "소개",
     url: "#intro"

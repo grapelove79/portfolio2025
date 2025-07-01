@@ -12,7 +12,7 @@ import useIsMobile from "../hooks/useIsMobile";
 * @returns {string} requestAnimationFrame 으로 스크롤 이벤트 당 최대 1번만 DOM 접근 → 강제 Reflow 방지.
 */
 
-const Header = ({threshold = 5}) => {
+const Header = ({ threshold = 5 }) => {
   const [on, setOn] = useState(false); // 모바일 메뉴 상태
   const [scrollDirection, setScrollDirection] = useState("up"); // 스크롤 방향 상태 관리 ("up" 또는 "down")
   const headerRef = useRef(null);  // header DOM 참조
@@ -116,33 +116,7 @@ const Header = ({threshold = 5}) => {
   }, [scrollDirection]);
 
   // 모바일 메뉴 클릭 시 메뉴 닫기
-  // const handleNavClick = () => setOn(false);
-  
-  const videowrapRef = useRef(null);
-
-const handleNavClick = (e, url) => {
-  setOn(false); // 메뉴 닫기
-
-  if (url === "#home") {
-    e.preventDefault();
-
-    // 스크롤 최상단 이동 (스무스)
-    window.scrollTo({ top: 0, behavior: "smooth" });
-
-    // videoWrap active 트리거
-    if (videowrapRef.current) {
-      videowrapRef.current.classList.remove("active");
-
-      // 강제로 다시 추가하여 트리거
-      // reflow를 강제해야 CSS transition이 인식됨
-      void videowrapRef.current.offsetWidth;
-
-      videowrapRef.current.classList.add("active");
-    }
-  }
-  // else: 기본 href 이동 그대로
-};
-
+  const handleNavClick = () => setOn(false);
 
   // 헤더 클래스명 구성
   const headerClassName = [
@@ -161,13 +135,13 @@ const handleNavClick = (e, url) => {
           <ul className="nav__wrap">
             {headerNav.map((nav, key) => (
               <li key={key}>
-                <a 
-                href={nav.url} 
-                // onClick={handleNavClick}
-                onClick={(e) => handleNavClick(e, nav.url)}
+                <a
+                  href={nav.url}
+                  // onClick={handleNavClick}
+                  onClick={(e) => handleNavClick(e, nav.url)}
                 >
                   {nav.title}
-                  </a>
+                </a>
               </li>
             ))}
           </ul>
