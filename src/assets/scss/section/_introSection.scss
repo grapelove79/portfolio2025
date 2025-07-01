@@ -1,24 +1,27 @@
 .video-section {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+
 
   .banner-box {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 660rem;
+    // height: 660rem;
     z-index: 2;
     transition: top 0.8s;
     transition-timing-function: cubic-bezier(0.34, 0.02, 0.61, 0.98);
     background-color: var(--white);
 
     @media screen and (max-width: 1024px) {
-      font-size: 30rem;
       height: calc(100% - 50vh);
     }
 
     &.widthW {
       width: 100%;
-      // height: calc(100% - 50vh);
+      height: calc(100% - 50vh);
     }
 
     &.heightH {

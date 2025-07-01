@@ -25,6 +25,7 @@ const IntroSection = () => {
     const handleResize = () => {
       const { innerWidth, innerHeight } = window;
       if (!bannerRef.current) return;
+
       const banner = bannerRef.current;
 
       if (innerWidth > innerHeight) {
@@ -112,7 +113,7 @@ const IntroSection = () => {
   }, []);
 
   return (
-    <section id="home" className="video-section" ref={containerRef}>
+    <section className="video-section" ref={containerRef}>
       <div className="banner-box" ref={bannerRef}>
         <div className="banner-inner">
           <p>2025</p>
