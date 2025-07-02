@@ -1,6 +1,7 @@
 #intro {
   padding-top: 105rem;
   padding-bottom: 105rem;
+  overflow: hidden;
 }
 
 .intro__inner {
@@ -11,6 +12,7 @@
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
+
 
   @media screen and (max-width: 1024px) {
     justify-content: center;

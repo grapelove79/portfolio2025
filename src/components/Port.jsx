@@ -12,6 +12,20 @@ const Port = () => {
 
   const [dimensions, setDimensions] = useState({ workW: 0, innerW: 0 });
 
+  useEffect(() => {
+    // 100vh 대신 JS로 실제 뷰포트 높이 계산해서 적용:
+    // 모바일 브라우저는 주소창 높이 변화, 가상 키보드, 100vh 계산 문제로 인해 height: 100vh나 flexbox 기반의 중앙 정렬이 깨질 수 있음.
+    // 특히 iOS는 Safari에서 100vh가 보이는 영역(viewport)에 따라 다르게 해석
+    const setVh = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+
+    setVh();
+    window.addEventListener('resize', setVh);
+    return () => window.removeEventListener('resize', setVh);
+  }, []);
+
   // (1) 전체 width 계산 후 상태 저장
   useEffect(() => {
 

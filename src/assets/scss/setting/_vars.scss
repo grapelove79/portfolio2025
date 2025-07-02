@@ -34,6 +34,10 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+   @media (max-width: 1024px) {
+    cursor: auto;
+  }
 }
 
 html {
@@ -119,10 +123,6 @@ body {
   overflow-x: hidden;
   // overscroll-behavior: none;
   // touch-action: none;
-
-  @media (max-width: 1024px) {
-    cursor: auto;
-  }
 }
 
 #wrap {

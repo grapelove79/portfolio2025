@@ -1,7 +1,5 @@
 #header {
-  // @include position-fixed;
-  // position: fixed;
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -11,7 +9,8 @@
   transition: top 0.3s ease;
   background: #fff;
   z-index: 99999;
-border-bottom: 1px solid var(--black500);
+  border-bottom: 1px solid var(--black500);
+
   @media screen and (max-width: 1024px) {
     height: 70rem;
     padding: 0;
@@ -29,8 +28,6 @@ border-bottom: 1px solid var(--black500);
 #header.on {
   .header__nav {
     right: 0;
-    // left: 0
-    // display: block;
   }
 
   .nav__wrap {
@@ -72,13 +69,10 @@ border-bottom: 1px solid var(--black500);
   position: relative;
   @include flex-between;
   height: 100%;
-  // margin: 0 auto;
-   padding: 0 100rem;
-  // width: calc(100% - 200rem);
+  padding: 0 100rem;
   width: 100%;
 
   @media screen and (max-width: 1024px) {
-    // width: calc(100% - 40rem);
     padding: 0 20rem;
   }
 
@@ -104,27 +98,22 @@ border-bottom: 1px solid var(--black500);
     right: 0;
     width: max-content;
     height: 100%;
-    // display: block;
-    // overflow: hidden;
 
     @media (max-width: 1024px) {
       position: fixed;
-        top: 70rem;
-        right: -110%;
-        width: 100%;
-        height: 100dvh;
-        padding: 0 20rem;
-        background-color: var(--white);
-        transition: right 0.3s ease;
-        z-index: 0;
+      top: 70rem;
+      right: -110%;
+      width: 100%;
+      height: 100dvh;
+      padding: 0 20rem;
+      background-color: var(--white);
+      transition: right 0.3s ease;
+      z-index: 14;
     }
 
     .nav__wrap {
-      // position: relative;
       display: flex;
       flex-wrap: nowrap;
-      // justify-content: center;
-      // height: 100%;
       text-align: center;
 
       @media screen and (max-width: 1024px) {
@@ -166,14 +155,6 @@ border-bottom: 1px solid var(--black500);
 
   .header__nav__mobile {
     display: none;
-    // position: absolute;
-    // top: 50%;
-    // right: 20rem;
-    // width: 40rem;
-    // height: 40rem;
-    // transform: translateY(-50%);
-    // cursor: pointer;
-    // z-index: 10001; // header__nav보다 높게
 
     @media (max-width: 1024px) {
       display: block;
@@ -220,9 +201,8 @@ border-bottom: 1px solid var(--black500);
 }
 
 body {
-
   &.stop-scroll__loading,
-  .stop-scroll--menu {
+  &.stop-scroll {
     overflow: hidden;
     height: 100%;
     touch-action: none;
