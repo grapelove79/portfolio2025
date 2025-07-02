@@ -66,7 +66,7 @@ const IntroSection = () => {
 
             if (self.direction === -1) {
               // scroll up
-              if (progress === 1) banner?.classList.remove("active");
+              if (progress === 0) banner?.classList.remove("active");
               if (progress < 10) textRefs.current[0]?.classList.remove("active");
               if (progress < 35) textRefs.current[0]?.classList.remove("none");
               if (progress < 55) textRefs.current[1]?.classList.remove("active");

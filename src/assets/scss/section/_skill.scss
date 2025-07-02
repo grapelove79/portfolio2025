@@ -50,7 +50,6 @@
   .skill__list {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(6, minmax(auto, 1fr));
     grid-template-columns: repeat(6, minmax(0, 1fr));
     column-gap: 24rem;
     row-gap: 24rem;
@@ -87,6 +86,7 @@
       }
 
       @media screen and (max-width: 600px) {
+        grid-column-end: 3 span;
         border-radius: 14rem;
         padding-top: 14rem;
       }

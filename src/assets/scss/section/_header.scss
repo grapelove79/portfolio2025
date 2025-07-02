@@ -13,12 +13,10 @@
   z-index: 99999;
 border-bottom: 1px solid var(--black500);
   @media screen and (max-width: 1024px) {
-            width: 100dvw;
     height: 70rem;
     padding: 0;
   }
 }
-
 
 #header.hide {
   top: -100rem;
