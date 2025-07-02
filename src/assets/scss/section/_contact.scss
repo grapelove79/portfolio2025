@@ -1,7 +1,10 @@
 #contact {
   padding-top: 105rem;
   padding-bottom: 105rem;
-  height: calc(100dvh - 200rem);
+
+  @media screen and (max-width: 1024px) {
+    height: calc(100dvh - 200rem);
+  }
 }
 
 .contact__motion {
