@@ -2,7 +2,6 @@
   position: relative;
   background-color: #f2f4f8;
 
-
   .pin-spacer {
     height: 860rem;
     z-index: auto !important; //pin-spacer가 레이어 위에 뜨지 않도록
@@ -12,27 +11,13 @@
     position: relative;
     padding-top: 105px;
 
-    // @media screen and (max-width: 1024px) {
-    //   padding-top: 90px;
-    // }
-
     .port__wrap {
       position: relative;
       width: 100%;
-      //height: 100%; // pin 될 때 뷰포트 높이 고정
-      // padding-top: 105rem;
-      // padding-bottom: 100rem; // 기존 250rem → 줄임
       height: calc(var(--vh, 1vh) * 100);
       height: 1534rem; 
-      ; // 6/27  pin 될 때 뷰포트 높이 고정
-      // display: flex;
-      // flex-direction: column;
-      // justify-content: flex-start;
-
-
+      
       @media screen and (max-width: 1024px) {
-        // padding-top: 90rem;
-        // padding-bottom: 60rem;
          height: 860rem; // 6/27
       }
 
@@ -78,7 +63,6 @@
       overflow: hidden;
       margin-top: 52rem;
 
-
       @media screen and (max-width: 1024px) {
         position: relative;
         padding-left: 20rem;
@@ -102,9 +86,7 @@
           height: 660rem;
           background: var(--white);
           border-radius: 16rem;
-          // box-shadow: 0 2rem 10rem 0 rgba(0, 0, 0, 0.1);
           overflow: hidden;
-
           transition: box-shadow 0.3s ease; // 깔끔한 hover 효과
 
           @media (max-width: 1024px) {
@@ -118,7 +100,6 @@
 
           @media (min-width: 1024px) and (pointer: fine) {
             &:hover {
-              // box-shadow: 0 16rem 16rem 0 rgba(0, 0, 0, 0.1);
 
               .arrow:before {
                 animation: outlinkAnimationBefore 0.3s forwards 0.3s;
@@ -158,12 +139,10 @@
             }
           }
 
-
           .num {
             font-size: 32rem;
             font-family: var(--mainNum-font);
           }
-
 
           .port__item-link {
             display: inline-block;

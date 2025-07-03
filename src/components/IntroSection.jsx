@@ -94,6 +94,79 @@ const IntroSection = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const video = videoRef.current;
+    const videoWrap = videowrapRef.current;
+
+    if (!video || !videoWrap) return;
+
+    // play/pause 버튼
+    const playBtn = videoWrap.querySelector(".movie-btn.play");
+    const pauseBtn = videoWrap.querySelector(".movie-btn.pause");
+
+    // suspend 로깅
+    const onSuspend = () => {
+      console.log("Data loading has been suspended.");
+    };
+
+    const handleUserInteraction = () => {
+      video.addEventListener("suspend", onSuspend);
+    };
+
+    document.body.addEventListener("click", handleUserInteraction, { once: true });
+    document.body.addEventListener("touchstart", handleUserInteraction, { once: true });
+
+    const handlePlay = () => {
+      video.play();
+      playBtn?.setAttribute("aria-pressed", "true");
+      pauseBtn?.setAttribute("aria-pressed", "false");
+      playBtn.style.display = "none";
+      pauseBtn.style.display = "inline-block";
+    };
+
+    const handlePause = () => {
+      video.pause();
+      playBtn?.setAttribute("aria-pressed", "false");
+      pauseBtn?.setAttribute("aria-pressed", "true");
+      playBtn.style.display = "inline-block";
+      pauseBtn.style.display = "none";
+    };
+
+    // 버튼 이벤트 연결
+    playBtn?.addEventListener("click", handlePlay);
+    pauseBtn?.addEventListener("click", handlePause);
+
+    // 비디오 영역 클릭 시 토글
+    const handleVideoWrapClick = (e) => {
+      // 버튼 자체 클릭이면 무시
+      if (e.target.closest(".movie-btn")) return;
+
+      video.paused ? handlePlay() : handlePause();
+    };
+
+    videoWrap.addEventListener("click", handleVideoWrapClick);
+
+    // 초기 상태 (자동 재생하면 pause 버튼만 보이도록)
+    playBtn.style.display = video.paused ? "inline-block" : "none";
+    pauseBtn.style.display = video.paused ? "none" : "inline-block";
+
+    return () => {
+      // suspend 리스너 해제
+      document.body.removeEventListener("click", handleUserInteraction);
+      document.body.removeEventListener("touchstart", handleUserInteraction);
+      video.removeEventListener("suspend", onSuspend);
+
+      // 버튼 해제
+      playBtn?.removeEventListener("click", handlePlay);
+      pauseBtn?.removeEventListener("click", handlePause);
+
+      // 래퍼 클릭 해제
+      videoWrap.removeEventListener("click", handleVideoWrapClick);
+    };
+
+  }, []);
+
+
   return (
     <section className="video-section" ref={containerRef}>
       <div className="banner-box" ref={bannerRef}>
@@ -102,8 +175,10 @@ const IntroSection = () => {
           <strong>Portfolio</strong>
         </div>
       </div>
-      <div className="video-wrap" ref={videowrapRef}>
-        <video ref={videoRef} src="/intro.mp4" muted playsInline loop />
+      {/* <div className="video-wrap" ref={videowrapRef}>
+        <video ref={videoRef} autoplay muted loop playsInline poster="/intro.png" >
+        <source  src="/intro.mp4" type="video/mp4" />
+       </video>
         <div className="txt_motion_box">
           {intro.map((text, index) => (
             <div key={index}
@@ -115,7 +190,56 @@ const IntroSection = () => {
             </div>
           ))}
         </div>
+        <div class="btn-wrap">
+				<button type="button" title="영상재생정지" class="movie-btn pause"></button>
+					<button type="button" title="영상재생정지" class="movie-btn play"></button>
+				</div>
+      </div> */}
+      <div className="video-wrap" ref={videowrapRef}>
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/intro.png"
+        >
+          <source src="/intro.mp4" type="video/mp4" />
+        </video>
+
+        <div className="txt_motion_box">
+          {intro.map((text, index) => (
+            <div
+              key={index}
+              className={`txt_motion txt_motion0${index + 1}`}
+              ref={(el) => (textRefs.current[index] = el)}
+            >
+              <strong>{text.title}</strong>
+              <p>{text.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <div
+          className="btn-wrap"
+          role="group"
+          aria-label="영상 재생 컨트롤"
+        >
+          <button
+            type="button"
+            aria-label="영상 일시정지"
+            aria-pressed="true"
+            className="movie-btn pause"
+          ></button>
+          <button
+            type="button"
+            aria-label="영상 재생"
+            aria-pressed="false"
+            className="movie-btn play"
+          ></button>
+        </div>
       </div>
+
     </section>
   );
 };

@@ -111,91 +111,157 @@
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-}
 
-.txt_motion {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: calc(100% - 200rem);
-  text-align: center;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  color: var(--white);
-
-  @media screen and (max-width: 1024px) {
-    width: calc(100% - 55rem);
-  }
-
-  >* {
-    display: block;
-    transition-property: transform, opacity;
-    transition-duration: 1.2s;
-    transition-timing-function: cubic-bezier(0.41, 0.01, 0.16, 1.01);
-  }
-
-  strong {
-    font-size: 50rem;
-    font-weight: 800;
-    font-family: var(--mainKor-font);
-    letter-spacing: -0.5px;
+  .txt_motion {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(100% - 200rem);
+    text-align: center;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    color: var(--white);
 
     @media screen and (max-width: 1024px) {
-      font-size: 28rem;
+      width: calc(100% - 55rem);
     }
 
-    @media screen and (max-width: 600px) {
+    >* {
+      display: block;
+      transition-property: transform, opacity;
+      transition-duration: 1.2s;
+      transition-timing-function: cubic-bezier(0.41, 0.01, 0.16, 1.01);
+    }
+
+    strong {
+      font-size: 50rem;
+      font-weight: 800;
+      font-family: var(--mainKor-font);
+      letter-spacing: -0.5px;
+
+      @media screen and (max-width: 1024px) {
+        font-size: 28rem;
+      }
+
+      @media screen and (max-width: 600px) {
+        white-space: pre-wrap;
+      }
+    }
+
+    p {
+      font-size: 26rem;
+      font-weight: 600;
+      margin-top: 22rem;
+      line-height: 1.6;
+      letter-spacing: -0.5px;
       white-space: pre-wrap;
+
+      @media screen and (max-width: 1024px) {
+        font-size: 16rem;
+        margin-top: 18rem;
+      }
+
+      @media screen and (max-width: 1024px) {
+        white-space: unset;
+      }
     }
   }
 
-  p {
-    font-size: 26rem;
-    font-weight: 600;
-    margin-top: 22rem;
-    line-height: 1.6;
-    letter-spacing: -0.5px;
-    white-space: pre-wrap;
-
-    @media screen and (max-width: 1024px) {
-      font-size: 16rem;
-      margin-top: 18rem;
-    }
-
-    @media screen and (max-width: 1024px) {
-      white-space: unset;
-    }
-  }
-}
-
-.txt_motion01,
-.txt_motion02 {
-  strong {
-    transform: translateY(calc(max(66px, 6.5104166667vw) * -1));
-    opacity: 0;
-  }
-
-  p {
-    transform: translateY(max(66px, 6.5104166667vw));
-    opacity: 0;
-    word-break: keep-all;
-    word-wrap: break-word;
-  }
-
-  &.active {
-
-    strong,
-    p {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-
-  &.none {
-
-    strong,
-    p {
+  .txt_motion01,
+  .txt_motion02 {
+    strong {
+      transform: translateY(calc(max(66px, 6.5104166667vw) * -1));
       opacity: 0;
     }
+
+    p {
+      transform: translateY(max(66px, 6.5104166667vw));
+      opacity: 0;
+      word-break: keep-all;
+      word-wrap: break-word;
+    }
+
+    &.active {
+
+      strong,
+      p {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    &.none {
+
+      strong,
+      p {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+/* === 기본 버튼 공통 === */
+.btn-wrap {
+  position: absolute;
+  left: 130rem;
+  bottom: 130rem;
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+  height: 60rem;
+
+  @media screen and (max-width: 1024px) {
+    left: 40rem;
+    bottom: 50rem;
+    height: 42rem;
+  }
+}
+
+.movie-btn {
+  width: 60rem;
+  height: 60rem;
+  background-position-x: 0px;
+  background-position-y: center;
+  background-size: 60rem;
+  background-repeat: no-repeat;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: initial;
+  opacity: 1;
+  visibility: visible;
+
+  @media screen and (max-width: 1024px) {
+    width: 42rem;
+    height: 42rem;
+    background-size: 42rem;
+  }
+
+  &.play {
+    background-image: url("../../img/icon-pause.png");
+  }
+
+  &.pause {
+    background-image: url("../../img/icon-play.png");
+  }
+
+  /* === 상태 토글 === */
+
+  /* play 버튼은 비디오가 일시정지 상태일 때만 보이도록 */
+  &.play[aria-pressed="false"] {
+    display: inline-block;
+  }
+
+  &.play[aria-pressed="true"] {
+    display: none;
+  }
+
+  /* pause 버튼은 비디오가 재생 중일 때만 보이도록 */
+  &.pause[aria-pressed="true"] {
+    display: inline-block;
+  }
+
+  &.pause[aria-pressed="false"] {
+    display: none;
   }
 }

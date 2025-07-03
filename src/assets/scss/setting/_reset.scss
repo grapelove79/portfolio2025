@@ -2,6 +2,8 @@
 *,
 *:before,
 *:after {
+	margin: 0;
+	padding: 0;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -9,32 +11,34 @@
 }
 
 // 공백 초기화
+html,
 body,
-button,
-dd,
+div,
+p,
 dl,
 dt,
-fieldset,
-form,
+dd,
 h1,
 h2,
 h3,
 h4,
 h5,
 h6,
-input,
-legend,
+ul,
 li,
 ol,
-p,
-select,
 table,
-td,
-textarea,
 th,
-ul,
+td,
+select,
+textarea,
 figure,
-figcaption {
+figcaption,
+fieldset,
+form,
+input,
+legend,
+button {
 	margin: 0;
 	padding: 0;
 }
@@ -47,6 +51,13 @@ select,
 table,
 textarea {
 	font-family: var(--mainKor-font), var(--mainEng-font), "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", helvetica, sans-serif;
+}
+
+input:focus,
+select:focus,
+option:focus,
+button:focus {
+	outline: none;
 }
 
 // 링크 초기화
@@ -83,6 +94,31 @@ strong {
 img {
 	vertical-align: top;
 	width: 100%;
+}
+
+button {
+	background: none;
+	border: none;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+	overflow: visible;
+	white-space: nowrap;
+}
+
+button:active {
+	outline: none;
+}
+
+button::-moz-focus-inner {
+	padding: 0;
+	border: 0;
+}
+
+img,
+input,
+button {
+  vertical-align: top;
 }
 
 // 스킵메뉴
