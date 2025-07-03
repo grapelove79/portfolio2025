@@ -11,9 +11,9 @@ const Career = () => {
         <h2 className="career__title scroll__motion">경력 <em>Career</em></h2>
         <div className="career__wrap">
           {careerText.map((career, key) => (
-            <article className={`career__item s${key + 1}`} key={key}>    
+            <article className={`career__item s${key + 1}`} key={key}>
               <div className="title__wrap">
-               <div className="title__inner">
+                <div className="title__inner">
                   <p className="date">
                     {career.date}
                   </p>

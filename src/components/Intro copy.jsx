@@ -28,7 +28,7 @@ const MotionComponent = () => {
         });
       });
 
-      // ✅ Motion() 함수도 여기에 실행
+      // Motion() 함수도 여기에 실행
       // Motion(); // 이 함수는 따로 정의되어 있어야 합니다
     }, containerRef);
 

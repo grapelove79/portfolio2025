@@ -20,7 +20,7 @@ const Header = ({ threshold = 5 }) => {
   const isMobile = useIsMobile();
   //const prevScrollYRef = useRef(0); // 이전 스크롤 위치 저장할 ref (렌더링과 무관)
   //const lastScroll = useRef(window.scrollY); // 이전 스크롤 위치 저장 (렌더링과 무관)
-   const lastScrollYRef = useRef(0); // 이전 스크롤 위치 저장용 ref
+  const lastScrollYRef = useRef(0); // 이전 스크롤 위치 저장용 ref
 
   // 메뉴 토글
   const toggleMenu = () => {

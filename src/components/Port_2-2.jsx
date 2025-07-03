@@ -1,6 +1,3 @@
-
-
-
 import React, { useEffect, useRef, useState } from "react";
 import { portText } from "../constants";
 import { gsap } from "gsap";
