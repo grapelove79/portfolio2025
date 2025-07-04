@@ -94,6 +94,7 @@ const Header = ({ threshold = 5 }) => {
         // 방법 2: 방향이 이전 상태와 다를 때만 상태 업데이트
         if (scrollDirection !== direction) {
           setScrollDirection(direction); // 스크롤 방향 상태 업데이트
+
           setHeaderHidden(direction === "down"); // 스크롤 방향이 down이면 헤더 숨김
         }
 

@@ -68,8 +68,8 @@ const IntroSection = () => {
             const banner = bannerRef.current;
             const videoEl = videowrapRef.current;
 
-            if (progress > 1 && isMobile) {
-              setHeaderHidden(false); // 강제로 header 보이게
+            if (self.direction === -1 && progress > 1 && isMobile) {
+              setHeaderHidden(false);
             }
 
             if (self.direction === -1) {
@@ -174,7 +174,6 @@ const IntroSection = () => {
 
   }, []);
 
-
   return (
     <section className="video-section" ref={containerRef}>
       <div className="banner-box" ref={bannerRef}>
@@ -186,7 +185,7 @@ const IntroSection = () => {
       {/* <div className="video-wrap" ref={videowrapRef}>
         <video ref={videoRef} autoplay muted loop playsInline poster="/intro.png" >
         <source  src="/intro.mp4" type="video/mp4" />
-       </video>
+        </video>
         <div className="txt_motion_box">
           {intro.map((text, index) => (
             <div key={index}
