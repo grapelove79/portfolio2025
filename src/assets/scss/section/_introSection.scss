@@ -22,6 +22,11 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  padding-top: 100rem;
+
+  @media screen and (max-width: 1024px) {
+    padding-top: 70rem;
+  }
 
   &.widthW {
     width: 100%;
@@ -208,14 +213,14 @@
 .btn-wrap {
   position: absolute;
   left: 130rem;
-  bottom: 28%;
+  bottom: calc(100rem + 6%);
   z-index: 10;
   height: 60rem;
 
   @media screen and (max-width: 1024px) {
     left: 40rem;
     height: 42rem;
-    bottom: 15%;
+    bottom: calc(20rem + 6%);
   }
 }
 
@@ -246,7 +251,6 @@
   &.pause {
     background-image: url("../../img/icon-pause.png");
   }
-
 
 
   /* === 상태 토글 === */

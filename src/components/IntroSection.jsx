@@ -213,7 +213,6 @@ const IntroSection = () => {
             </div>
           ))}
         </div>
-
         <div
           className="btn-wrap"
           role="group"
