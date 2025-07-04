@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { intro } from "../constants";
+import useIsMobile from "../hooks/useIsMobile";
+import useAppStore from "../hooks/useAppStore";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,6 +13,8 @@ const IntroSection = () => {
   const videowrapRef = useRef(null);
   const videoRef = useRef(null);
   const textRefs = useRef([]);
+  const isMobile = useIsMobile();
+  const { setHeaderHidden } = useAppStore();
 
   // 1. 브라우저 크기에 따라 배너 클래스 resize 조정 (가로/세로 기준)
   useEffect(() => {
@@ -64,6 +68,10 @@ const IntroSection = () => {
             const banner = bannerRef.current;
             const videoEl = videowrapRef.current;
 
+            if (progress > 1 && isMobile) {
+              setHeaderHidden(false); // 강제로 header 보이게
+            }
+
             if (self.direction === -1) {
               // scroll up
               if (progress === 0) banner?.classList.remove("active");
@@ -92,7 +100,7 @@ const IntroSection = () => {
     return () => {
       ctx.revert(); // ScrollTrigger 제거
     };
-  }, []);
+  }, [isMobile, setHeaderHidden]);
 
   useEffect(() => {
     const video = videoRef.current;
