@@ -190,10 +190,6 @@ const IntroSection = () => {
             </div>
           ))}
         </div>
-        <div class="btn-wrap">
-				<button type="button" title="영상재생정지" class="movie-btn pause"></button>
-					<button type="button" title="영상재생정지" class="movie-btn play"></button>
-				</div>
       </div> */}
       <div className="video-wrap" ref={videowrapRef}>
         <video
@@ -206,7 +202,6 @@ const IntroSection = () => {
         >
           <source src="/intro.mp4" type="video/mp4" />
         </video>
-
         <div className="txt_motion_box">
           {intro.map((text, index) => (
             <div

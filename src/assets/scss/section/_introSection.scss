@@ -205,8 +205,6 @@
   position: absolute;
   left: 130rem;
   bottom: 130rem;
-  display: flex;
-  gap: 10px;
   z-index: 10;
   height: 60rem;
 
@@ -238,12 +236,14 @@
   }
 
   &.play {
-    background-image: url("../../img/icon-pause.png");
+    background-image: url("../../img/icon-play.png");
   }
 
   &.pause {
-    background-image: url("../../img/icon-play.png");
+    background-image: url("../../img/icon-pause.png");
   }
+
+
 
   /* === 상태 토글 === */
 

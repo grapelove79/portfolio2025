@@ -19,6 +19,9 @@
 
 #header.hide {
   top: -100rem;
+  @media screen and (max-width: 1024px) {
+    top: -70rem;
+  }
 }
 
 #header.on.hide {
