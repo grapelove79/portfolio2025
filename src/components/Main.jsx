@@ -1,10 +1,9 @@
-import React, { useRef } from "react";
+import React from "react";
 
 const Main = ({ children }) => {
-  const mainRef = useRef(null);
 
   return (
-    <main id="main" role="main" ref={mainRef} >
+    <main id="main" role="main" >
         { children }
     </main>
   )
