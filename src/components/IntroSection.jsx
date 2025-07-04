@@ -234,7 +234,6 @@ const IntroSection = () => {
           ></button>
         </div>
       </div>
-
     </section>
   );
 };
