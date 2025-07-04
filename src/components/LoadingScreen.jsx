@@ -20,7 +20,7 @@ const LoadingScreen = ({ onFinish }) => {
         onFinish();  // App.js 또는 HomeView에서 상태 변경용 콜백 호출
         // 로딩 완료 콜백: 이 타이밍에 App → HomeView → IntroSection 순으로 mount
 
-      }, 500); // fade-out 후 500ms 기다림
+      }, 100); // fade-out 후 500ms 기다림
       return () => clearTimeout(timeout);
     }
   }, [count, onFinish]);
