@@ -21,6 +21,7 @@ const Header = ({ threshold = 5 }) => {
   //const prevScrollYRef = useRef(0); // 이전 스크롤 위치 저장할 ref (렌더링과 무관)
   //const lastScroll = useRef(window.scrollY); // 이전 스크롤 위치 저장 (렌더링과 무관)
   const lastScrollYRef = useRef(0); // 이전 스크롤 위치 저장용 ref
+  const mainRef = useRef(null);
 
   // 메뉴 토글
   const toggleMenu = () => {
@@ -66,8 +67,9 @@ const Header = ({ threshold = 5 }) => {
 
       ticking = true;
       window.requestAnimationFrame(() => {
-        const currentScroll = window.scrollY;
+        const currentScroll = window.scrollY || window.pageYOffset;
         const diff = currentScroll - lastScrollYRef.current; // 이전과 현재 차이 계산
+        const mainTop = mainRef.current?.offsetTop || 0;
 
         // 스크롤 변화량이 threshold보다 작으면 방향 판단하지 않음 (작은 흔들림 무시)
         if (Math.abs(diff) < threshold) return;
@@ -82,6 +84,7 @@ const Header = ({ threshold = 5 }) => {
           scrollDirection이 바뀌지 않으면 setHeaderHidden도 실행되지 않음.
           특히 연속된 scroll 이벤트에서 최소한의 setState만 발생시켜 퍼포먼스에 유리합니다.
         */
+
         // setScrollDirection((prev) => {
         //   // 현재 방향이 이전 방향과 다를 때만 상태 업데이트
         //   if (prev !== direction) {
@@ -90,12 +93,16 @@ const Header = ({ threshold = 5 }) => {
         //   }
         //   return prev; // 이전 방향과 같으면 상태 변경 없이 그대로 유지
         // });
+        
 
         // 방법 2: 방향이 이전 상태와 다를 때만 상태 업데이트
         if (scrollDirection !== direction) {
           setScrollDirection(direction); // 스크롤 방향 상태 업데이트
-
           setHeaderHidden(direction === "down"); // 스크롤 방향이 down이면 헤더 숨김
+        }
+
+        if (currentScroll > mainTop) {
+          setHeaderHidden(direction === "down");
         }
 
         // 현재 위치를 이전 스크롤 위치로 저장
