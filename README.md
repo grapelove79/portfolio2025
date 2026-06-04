@@ -17,6 +17,8 @@
 - sass를 설치합니다. `npm install sass`
 - gsap를 설치합니다. `npm install gsap`
 - lenis를 설치합니다. `npm install @studio-freight/lenis`
+- react 실행 `npm start`
+- react 배포용 파일 생성 `npm run build`
 
 ## git 셋팅
 ### reate a new repository on the command line
