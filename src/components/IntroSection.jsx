@@ -170,7 +170,7 @@ const IntroSection = () => {
     <section className="video-section" ref={containerRef}>
       <div className="banner-box" ref={bannerRef}>
         <div className="banner-inner">
-          <p>2025</p>
+          <p>2026</p>
           <strong>Portfolio</strong>
         </div>
       </div>
